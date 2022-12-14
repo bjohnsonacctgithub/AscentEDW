@@ -1,0 +1,36 @@
+{
+	"name": "Stop IntegrationRuntime-SSIS",
+	"properties": {
+		"activities": [
+			{
+				"name": "Stop IntegrationRuntime-SSIS",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://management.azure.com/subscriptions/5c89a77e-f321-4fcd-b56c-bdb01a14b85b/resourcegroups/AscentAnalytics/providers/Microsoft.DataFactory/factories/AscentAnalyticsDataFactory/integrationruntimes/IntegrationRuntimeSSIS/stop?api-version=2018-06-01",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"body": {
+						"message": "Stop Ascent IR"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
