@@ -15,9 +15,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"url": "https://management.azure.com/subscriptions/5c89a77e-f321-4fcd-b56c-bdb01a14b85b/resourcegroups/AscentAnalytics/providers/Microsoft.DataFactory/factories/AscentAnalyticsDataFactory/integrationruntimes/IntegrationRuntimeSSIS/start?api-version=2018-06-01",
 					"connectVia": {
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"body": {
+						"message": "Start Ascent IR"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
 					}
 				}
 			}
