@@ -1,0 +1,28 @@
+{
+	"name": "IntegrationRuntimeSSIS",
+	"properties": {
+		"type": "Managed",
+		"description": "Integration Runtime for SSIS",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "West US 3",
+				"nodeSize": "Standard_D8_v3",
+				"numberOfNodes": 2,
+				"maxParallelExecutionsPerNode": 8
+			},
+			"ssisProperties": {
+				"catalogInfo": {
+					"catalogServerEndpoint": "ascentanalytics.database.windows.net",
+					"catalogAdminUserName": "AscentAdmin",
+					"catalogAdminPassword": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"catalogPricingTier": "S1"
+				},
+				"edition": "Standard",
+				"licenseType": "LicenseIncluded"
+			}
+		}
+	}
+}
