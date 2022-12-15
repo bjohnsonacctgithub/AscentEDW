@@ -1,0 +1,17 @@
+{
+	"name": "Oracle1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Quantum Oracle Database",
+		"annotations": [],
+		"type": "Oracle",
+		"typeProperties": {
+			"connectionString": "host=nike2.class4mro.lan;port=1521;servicename=TCCTL;user id=powerbi",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyY2Y4ZmY2MC1mMzc4LTQ3YjEtYTU2My05M2YzODUxMWM5NGIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IntegrationRuntimeSelfHosted",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
