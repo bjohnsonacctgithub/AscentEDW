@@ -22,11 +22,192 @@
 						"convertDecimalToInteger": true,
 						"queryTimeout": "02:00:00"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE dbo.TESTENV_SYS_COMPANIES",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SDF_SYSCM_001",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_SYSCM_001",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "COMPANY_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COMPANY_NAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "COMPANY_ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COMPANY_ID",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ADDRESS1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ADDRESS1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ADDRESS2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ADDRESS2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ADDRESS3",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ADDRESS3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CITY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CITY",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STATE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "STATE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ZIP_CODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ZIP_CODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "COUNTRY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COUNTRY",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SHIP_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SHIP_NAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FAA_NUMBER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FAA_NUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GLA_EQUITY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLA_EQUITY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "QuantumTestenvSysCompanies",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingSysCompanies",
 						"type": "DatasetReference"
 					}
 				]
