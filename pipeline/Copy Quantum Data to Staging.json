@@ -649,6 +649,184 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy GL_ACCT_CAT",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy GL_SEGMENT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT GAC_AUTO_KEY\n, GAC_PARENT\n, SYSCM_AUTO_KEY\n, ACCOUNT_TYPE\n, SEQ\n, DESCRIPTION\n, SDF_GAC_001\n, COSTOFGOODS_FLAG\n, OTHER_INCOME_FLAG\n, OTHER_EXPENSE_FLAG\nFROM TESTENV.GL_ACCT_CAT",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE TESTENV_GL_ACCT_CAT",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "GAC_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GAC_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "GAC_PARENT",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GAC_PARENT",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "ACCOUNT_TYPE",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCOUNT_TYPE",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SEQ",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SEQ",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SDF_GAC_001",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_GAC_001",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "COSTOFGOODS_FLAG",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COSTOFGOODS_FLAG",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OTHER_INCOME_FLAG",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OTHER_INCOME_FLAG",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OTHER_EXPENSE_FLAG",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OTHER_EXPENSE_FLAG",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumTestenvGLAccountCategory",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingGLAcctCat",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
