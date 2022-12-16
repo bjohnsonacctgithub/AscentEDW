@@ -332,7 +332,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT COC_AUTO_KEY\n, CODE\n, COUNTRY_NAME\nFROM TESTENV.COMPANY_CODES",
+						"oracleReaderQuery": "SELECT COC_AUTO_KEY\n, CODE\n, COUNTRY_NAME\nFROM TESTENV.COUNTRY_CODES",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
