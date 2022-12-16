@@ -241,7 +241,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE TABLE dbo.STAGING_GEO_CODES",
+						"preCopyScript": "TRUNCATE TABLE dbo.TESTENV_GEO_CODES",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
