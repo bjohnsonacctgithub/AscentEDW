@@ -1,5 +1,5 @@
 {
-	"name": "TestenvSysCompanies",
+	"name": "QuantumTestenvSysCompanies",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Oracle1",

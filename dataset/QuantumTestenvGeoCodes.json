@@ -1,5 +1,5 @@
 {
-	"name": "TestenvGeoCodes",
+	"name": "QuantumTestenvGeoCodes",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Oracle1",

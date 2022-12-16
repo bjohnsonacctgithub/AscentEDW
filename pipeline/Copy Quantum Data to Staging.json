@@ -26,7 +26,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "TestenvSysCompanies",
+						"referenceName": "QuantumTestenvSysCompanies",
 						"type": "DatasetReference"
 					}
 				]
