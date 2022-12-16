@@ -5,7 +5,14 @@
 			{
 				"name": "Copy Quantum SYS_COMPANIES Table to Staging",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy Quantum COUNTRY_CODES",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -215,14 +222,7 @@
 			{
 				"name": "Copy Quantum GEO_CODES",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Copy Quantum SYS_COMPANIES Table to Staging",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -399,6 +399,112 @@
 				"outputs": [
 					{
 						"referenceName": "StagingCountryCodes",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy Quantum DIVISION",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy Quantum SYS_COMPANIES Table to Staging",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT DIV_AUTO_KEY\n, SYSCM_AUTO_KEY\n, SDF_DIV_001\n, DIVISION_NAME\nFROM TESTENV.DIVISION",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE TESTENV_DIVISION",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DIV_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "DIV_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SDF_DIV_001",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_DIV_001",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DIVISION_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DIVISION_NAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumTestenvDivision",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingDivision",
 						"type": "DatasetReference"
 					}
 				]
