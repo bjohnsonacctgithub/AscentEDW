@@ -1,0 +1,76 @@
+{
+	"name": "StagingSysCompanies",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "SYSCM_AUTO_KEY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SDF_SYSCM_001",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COMPANY_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COMPANY_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ADDRESS1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ADDRESS2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ADDRESS3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ZIPCODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COUNTRY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIP_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FAA_NUMBER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GLA_EQUITY",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_SYS_COMPANIES"
+		}
+	}
+}
