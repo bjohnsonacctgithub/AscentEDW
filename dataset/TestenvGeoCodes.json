@@ -1,0 +1,16 @@
+{
+	"name": "TestenvGeoCodes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Oracle1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "TESTENV",
+			"table": "GEO_CODES"
+		}
+	}
+}

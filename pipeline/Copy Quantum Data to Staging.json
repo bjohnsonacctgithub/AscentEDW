@@ -1,0 +1,37 @@
+{
+	"name": "Copy Quantum Data to Staging",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Quantum SYS_COMPANIES Table to Staging",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT SYS_COMPANIES.SYSCM_AUTO_KEY\n,SYS_COMPANIES.SDF_SYSCM_001\n,SYS_COMPANIES.COMPANY_NAME\n,SYS_COMPANIES.COMPANY_ID\n,SYS_COMPANIES.ADDRESS1\n,SYS_COMPANIES.ADDRESS2\n,SYS_COMPANIES.ADDRESS3\n,SYS_COMPANIES.CITY\n,SYS_COMPANIES.STATE\n,SYS_COMPANIES.ZIP_CODE\n,SYS_COMPANIES.COUNTRY\n,SYS_COMPANIES.SHIP_NAME\n,SYS_COMPANIES.FAA_NUMBER\n,SYS_COMPANIES.GLA_EQUITY\nFROM TESTENV.SYS_COMPANIES",
+						"partitionOption": "None",
+						"convertDecimalToInteger": true,
+						"queryTimeout": "02:00:00"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "TestenvSysCompanies",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
