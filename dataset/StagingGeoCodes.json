@@ -1,0 +1,34 @@
+{
+	"name": "StagingGeoCodes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "GEO_AUTO_KEY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GEO_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SDF_GEO_001",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_GEO_CODES"
+		}
+	}
+}
