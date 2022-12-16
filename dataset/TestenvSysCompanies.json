@@ -1,0 +1,16 @@
+{
+	"name": "TestenvSysCompanies",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Oracle1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "TESTENV",
+			"table": "SYS_COMPANIES"
+		}
+	}
+}
