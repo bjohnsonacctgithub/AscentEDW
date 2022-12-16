@@ -508,6 +508,147 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy GL_SEGMENT",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy Quantum GEO_CODES",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT GLS_AUTO_KEY\n, SEGMENT_NUMBER\n, ACCOUNT\n, DESCRIPTION\n, ACCOUNT_TYPE\n, ACCOUNT_TYPE_DESC\n, SDF_GLS_002\nFROM TESTENV.GL_SEGMENT",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE TESTENV_GL_SEGMENT",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "GLS_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLS_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SEGMENT_NUMBER",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SEGMENT_NUMBER",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "ACCOUNT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCOUNT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ACCOUNT_TYPE",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCOUNT_TYPE",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "ACCOUNT_TYPE_DESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCOUNT_TYPE_DESC",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SDF_GLS_002",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_GLS_002",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumTestenvGLSegment",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingGLSegment",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
