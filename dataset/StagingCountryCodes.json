@@ -1,0 +1,31 @@
+{
+	"name": "StagingCountryCodes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "COC_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COUNTRY_NAME",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_COUNTRY_CODES"
+		}
+	}
+}
