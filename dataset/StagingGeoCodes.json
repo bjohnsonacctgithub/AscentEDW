@@ -10,8 +10,9 @@
 		"schema": [
 			{
 				"name": "GEO_AUTO_KEY",
-				"type": "int",
-				"precision": 10
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
 			},
 			{
 				"name": "GEO_CODE",
