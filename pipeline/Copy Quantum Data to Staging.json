@@ -1087,6 +1087,302 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy GL_ACCOUNT",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy WO_SKILLS",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT GLA_AUTO_KEY\n, ACCOUNT_NUMBER\n, ACCOUNT_TYPE_DESC\n, SYSCM_AUTO_KEY\n, GAC_AUTO_KEY\n, DESCRIPTION\n, GLS_AUTO_KEY0\n, GLS_AUTO_KEY1\n, GLS_AUTO_KEY2\n, GLS_AUTO_KEY3\n, GLS_AUTO_KEY4\n, LEDGER\n, SEQ\n, BUDGETED\n, COSTOFGOODS_FLAG\n, ALLOW_ENTRY\n, REPLACEABLE\n, OTHER_INCOME_FLAG\n, OTHER_EXPENSE_FLAG\n, CONTROL_ACCOUNT_FLAG\nFROM TESTENV.GL_ACCOUNT",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE TESTENV_GL_ACCOUNT",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "GLA_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLA_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "ACCOUNT_NUMBER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCOUNT_NUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ACCOUNT_TYPE_DESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCOUNT_TYPE_DESC",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "GAC_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GAC_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GLS_AUTO_KEY0",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLS_AUTO_KEY0",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "GLS_AUTO_KEY1",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLS_AUTO_KEY1",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "GLS_AUTO_KEY2",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLS_AUTO_KEY2",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "GLS_AUTO_KEY3",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLS_AUTO_KEY3",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "GLS_AUTO_KEY4",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLS_AUTO_KEY4",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "LEDGER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LEDGER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SEQ",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SEQ",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "BUDGETED",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BUDGETED",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "COSTOFGOODS_FLAG",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COSTOFGOODS_FLAG",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ALLOW_ENTRY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ALLOW_ENTRY",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "REPLACEABLE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "REPLACEABLE",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OTHER_INCOME_FLAG",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OTHER_INCOME_FLAG",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OTHER_EXPENSE_FLAG",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OTHER_EXPENSE_FLAG",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CONTROL_ACCOUNT_FLAG",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CONTROL_ACCOUNT_FLAG",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumTestenvGLAccount",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingGLAccount",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
