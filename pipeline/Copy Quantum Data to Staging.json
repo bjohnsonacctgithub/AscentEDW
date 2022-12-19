@@ -872,7 +872,10 @@
 								},
 								"sink": {
 									"name": "DPT_AUTO_KEY",
-									"type": "Double"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
@@ -882,27 +885,10 @@
 								},
 								"sink": {
 									"name": "SYSCM_AUTO_KEY",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "GLS_AUTO_KEY",
-									"type": "Double"
-								},
-								"sink": {
-									"name": "GLS_AUTO_KEY",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "DEPT_NAME",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DEPT_NAME",
-									"type": "String"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
@@ -912,13 +898,34 @@
 								},
 								"sink": {
 									"name": "DIV_AUTO_KEY",
-									"type": "Double"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
+								"source": {
+									"name": "GLS_AUTO_KEY",
+									"type": "Double"
+								},
 								"sink": {
-									"name": "CONVERTED",
+									"name": "GLS_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "DEPT_NAME",
 									"type": "String"
+								},
+								"sink": {
+									"name": "DEPT_NAME",
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -928,157 +935,8 @@
 								},
 								"sink": {
 									"name": "SDF_DPT_001",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "SDF_DPT_002",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "SDF_DPT_003",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "SDF_DPT_004",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "SDF_DPT_005",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "SDF_DPT_006",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "SDF_DPT_007",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "SDF_DPT_008",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "SDF_DPT_009",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "SDF_DPT_010",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "RESTRICT_STOCK",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "OVERRIDE_ADDRESS",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "ADDRESS_LINE1",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "ADDRESS_LINE2",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "CITY",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "STATE",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "ZIP_CODE",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "COC_AUTO_KEY",
-									"type": "Double"
-								}
-							},
-							{
-								"sink": {
-									"name": "GEO_AUTO_KEY",
-									"type": "Double"
-								}
-							},
-							{
-								"sink": {
-									"name": "CONVERSION_ID",
-									"type": "Double"
-								}
-							},
-							{
-								"sink": {
-									"name": "PM_FLAG",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "NON_ACC_WOT",
-									"type": "Double"
-								}
-							},
-							{
-								"sink": {
-									"name": "NON_ACC_WOK",
-									"type": "Double"
-								}
-							},
-							{
-								"sink": {
-									"name": "NON_ACC_PNM",
-									"type": "Double"
-								}
-							},
-							{
-								"sink": {
-									"name": "WON_AUTO_KEY",
-									"type": "Double"
-								}
-							},
-							{
-								"sink": {
-									"name": "CHECK_RO_CONDITION",
-									"type": "String"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							}
 						],
