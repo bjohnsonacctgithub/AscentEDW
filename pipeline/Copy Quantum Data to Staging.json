@@ -1710,11 +1710,141 @@
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE TESTENV_GL_PERIOD",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "GLP_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLP_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "GLF_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLF_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "FISCAL_START",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "FISCAL_START",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "FISCAL_END",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "FISCAL_END",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "GLP_FORWARD",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLP_FORWARD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "GLP_LAST",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLP_LAST",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "IS_ACTIVE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "IS_ACTIVE",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BUDGET_PERIOD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BUDGET_PERIOD",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FYE_PERIOD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FYE_PERIOD",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "QuantumTestenvGLPeriod",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingGLPeriod",
 						"type": "DatasetReference"
 					}
 				]
