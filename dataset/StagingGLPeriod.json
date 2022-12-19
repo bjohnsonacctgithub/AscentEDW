@@ -1,0 +1,55 @@
+{
+	"name": "StagingGLPeriod",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "GLP_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "FISCAL_START",
+				"type": "date"
+			},
+			{
+				"name": "FISCAL_END",
+				"type": "date"
+			},
+			{
+				"name": "GLP_FORWARD",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "GLP_LAST",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "IS_ACTIVE",
+				"type": "nchar"
+			},
+			{
+				"name": "BUDGET_PERIOD",
+				"type": "nchar"
+			},
+			{
+				"name": "FYE_PERIOD",
+				"type": "nchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_GL_PERIOD"
+		}
+	}
+}
