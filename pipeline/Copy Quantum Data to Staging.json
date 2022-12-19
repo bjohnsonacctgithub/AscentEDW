@@ -855,9 +855,11 @@
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "OracleSink",
-						"writeBatchSize": 10000,
-						"preCopyScript": "TRUNCATE TESTENV_DEPARTMENT"
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TESTENV_DEPARTMENT",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -1095,7 +1097,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "QuantumTestenvDepartment",
+						"referenceName": "StagingDepartment",
 						"type": "DatasetReference"
 					}
 				]
