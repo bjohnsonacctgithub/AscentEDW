@@ -9,36 +9,32 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "DPT_AUTO_KEY",
+				"name": "WOK_AUTO_KEY",
 				"type": "decimal",
 				"precision": 22,
 				"scale": 0
 			},
 			{
-				"name": "SYSCM_AUTO_KEY",
-				"type": "decimal",
-				"precision": 22,
-				"scale": 0
-			},
-			{
-				"name": "DIV_AUTO_KEY",
-				"type": "decimal",
-				"precision": 22,
-				"scale": 0
-			},
-			{
-				"name": "GLS_AUTO_KEY",
-				"type": "decimal",
-				"precision": 22,
-				"scale": 0
-			},
-			{
-				"name": "DEPT_NAME",
+				"name": "DESCRIPTION",
 				"type": "nvarchar"
 			},
 			{
-				"name": "SDF_DPT_001",
+				"name": "SDF_WOK_003",
 				"type": "nvarchar"
+			},
+			{
+				"name": "SDF_WOK_001",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SDF_WOK_002",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BILLING_RATE",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 19
 			}
 		],
 		"typeProperties": {
