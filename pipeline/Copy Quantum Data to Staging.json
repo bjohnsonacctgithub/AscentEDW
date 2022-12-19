@@ -827,6 +827,278 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy Quantum DEPARTMENT",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy Quantum DIVISION",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT DPT_AUTO_KEY\n, SYSCM_AUTO_KEY\n, DIV_AUTO_KEY\n, GLS_AUTO_KEY\n, DEPT_NAME\n, SDF_DPT_001\nFROM TESTENV.DEPARTMENT",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "OracleSink",
+						"writeBatchSize": 10000,
+						"preCopyScript": "TRUNCATE TESTENV_DEPARTMENT"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DPT_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "DPT_AUTO_KEY",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "GLS_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GLS_AUTO_KEY",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "DEPT_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DEPT_NAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DIV_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "DIV_AUTO_KEY",
+									"type": "Double"
+								}
+							},
+							{
+								"sink": {
+									"name": "CONVERTED",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SDF_DPT_001",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_DPT_001",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "SDF_DPT_002",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "SDF_DPT_003",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "SDF_DPT_004",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "SDF_DPT_005",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "SDF_DPT_006",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "SDF_DPT_007",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "SDF_DPT_008",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "SDF_DPT_009",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "SDF_DPT_010",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "RESTRICT_STOCK",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "OVERRIDE_ADDRESS",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "ADDRESS_LINE1",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "ADDRESS_LINE2",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "CITY",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "STATE",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "ZIP_CODE",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "COC_AUTO_KEY",
+									"type": "Double"
+								}
+							},
+							{
+								"sink": {
+									"name": "GEO_AUTO_KEY",
+									"type": "Double"
+								}
+							},
+							{
+								"sink": {
+									"name": "CONVERSION_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"sink": {
+									"name": "PM_FLAG",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "NON_ACC_WOT",
+									"type": "Double"
+								}
+							},
+							{
+								"sink": {
+									"name": "NON_ACC_WOK",
+									"type": "Double"
+								}
+							},
+							{
+								"sink": {
+									"name": "NON_ACC_PNM",
+									"type": "Double"
+								}
+							},
+							{
+								"sink": {
+									"name": "WON_AUTO_KEY",
+									"type": "Double"
+								}
+							},
+							{
+								"sink": {
+									"name": "CHECK_RO_CONDITION",
+									"type": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumTestenvDepartment",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "QuantumTestenvDepartment",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
