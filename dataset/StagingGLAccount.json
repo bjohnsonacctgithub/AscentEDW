@@ -9,16 +9,18 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "GAC_AUTO_KEY",
+				"name": "GLA_AUTO_KEY",
 				"type": "decimal",
 				"precision": 22,
 				"scale": 0
 			},
 			{
-				"name": "GAC_PARENT",
-				"type": "decimal",
-				"precision": 22,
-				"scale": 0
+				"name": "ACCOUNT_NUMBER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ACCOUNT_TYPE_DESC",
+				"type": "nvarchar"
 			},
 			{
 				"name": "SYSCM_AUTO_KEY",
@@ -27,13 +29,7 @@
 				"scale": 0
 			},
 			{
-				"name": "ACCOUNT_TYPE",
-				"type": "decimal",
-				"precision": 22,
-				"scale": 0
-			},
-			{
-				"name": "SEQ",
+				"name": "GAC_AUTO_KEY",
 				"type": "decimal",
 				"precision": 22,
 				"scale": 0
@@ -43,11 +39,59 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "SDF_GAC_001",
+				"name": "GLS_AUTO_KEY0",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "GLS_AUTO_KEY1",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "GLS_AUTO_KEY2",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "GLS_AUTO_KEY3",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "GLS_AUTO_KEY4",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "LEDGER",
 				"type": "nvarchar"
 			},
 			{
+				"name": "SEQ",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "BUDGETED",
+				"type": "nchar"
+			},
+			{
 				"name": "COSTOFGOODS_FLAG",
+				"type": "nchar"
+			},
+			{
+				"name": "ALLOW_ENTRY",
+				"type": "nchar"
+			},
+			{
+				"name": "REPLACEABLE",
 				"type": "nchar"
 			},
 			{
@@ -56,6 +100,10 @@
 			},
 			{
 				"name": "OTHER_EXPENSE_FLAG",
+				"type": "nchar"
+			},
+			{
+				"name": "CONTROL_ACCOUNT_FLAG",
 				"type": "nchar"
 			}
 		],
