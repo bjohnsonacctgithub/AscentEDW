@@ -13,6 +13,288 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLPeriod')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TESTENV",
+					"table": "GL_PERIOD"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLFiscal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TESTENV",
+					"table": "GL_FISCAL"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingCountryCodes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "COC_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COUNTRY_NAME",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_COUNTRY_CODES"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingDepartment')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DPT_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DIV_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLS_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DEPT_NAME",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_DPT_001",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_DEPARTMENT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingDivision')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DIV_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SDF_DIV_001",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DIVISION_NAME",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_DIVISION"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLAccount')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLA_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "ACCOUNT_NUMBER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ACCOUNT_TYPE_DESC",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GAC_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "GLS_AUTO_KEY0",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLS_AUTO_KEY1",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLS_AUTO_KEY2",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLS_AUTO_KEY3",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLS_AUTO_KEY4",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "LEDGER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SEQ",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "BUDGETED",
+						"type": "nchar"
+					},
+					{
+						"name": "COSTOFGOODS_FLAG",
+						"type": "nchar"
+					},
+					{
+						"name": "ALLOW_ENTRY",
+						"type": "nchar"
+					},
+					{
+						"name": "REPLACEABLE",
+						"type": "nchar"
+					},
+					{
+						"name": "OTHER_INCOME_FLAG",
+						"type": "nchar"
+					},
+					{
+						"name": "OTHER_EXPENSE_FLAG",
+						"type": "nchar"
+					},
+					{
+						"name": "CONTROL_ACCOUNT_FLAG",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_ACCOUNT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/StagingGLAcctCat')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -78,6 +360,405 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "TESTENV_GL_ACCT_CAT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLSegment')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLS_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SEGMENT_NUMBER",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "ACCOUNT",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ACCOUNT_TYPE",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "ACCOUNT_TYPE_DESC",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_GLS_002",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_SEGMENT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGeoCodes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GEO_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GEO_CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_GEO_001",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GEO_CODES"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingSysCompanies')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SDF_SYSCM_001",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COMPANY_NAME",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COMPANY_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ADDRESS1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ADDRESS2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ADDRESS3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CITY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "STATE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ZIPCODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COUNTRY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIP_NAME",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FAA_NUMBER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "GLA_EQUITY",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_SYS_COMPANIES"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingWoSkills')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "WOK_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_WOK_003",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_WOK_001",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_WOK_002",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BILLING_RATE",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 19
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_WO_SKILLS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLJournal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLJ_AUTO_KEY\r\nGLJ_AUTO_KEY\r\nGLJ_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_JOURNAL"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLDistribution')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLD_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLJ_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLA_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_DISTRIBUTION"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLFiscal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLF_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_FISCAL"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLPeriod')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLP_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLF_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "FISCAL_START",
+						"type": "date"
+					},
+					{
+						"name": "FISCAL_END",
+						"type": "date"
+					},
+					{
+						"name": "GLP_FORWARD",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLP_LAST",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "IS_ACTIVE",
+						"type": "nchar"
+					},
+					{
+						"name": "BUDGET_PERIOD",
+						"type": "nchar"
+					},
+					{
+						"name": "FYE_PERIOD",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_PERIOD"
 				}
 			},
 			"dependsOn": []
@@ -925,6 +1606,1041 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy Quantum DEPARTMENT",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy Quantum DIVISION",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT DPT_AUTO_KEY\n, SYSCM_AUTO_KEY\n, DIV_AUTO_KEY\n, GLS_AUTO_KEY\n, DEPT_NAME\n, SDF_DPT_001\nFROM TESTENV.DEPARTMENT",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE TESTENV_DEPARTMENT",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "DPT_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "DPT_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DIV_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "DIV_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GLS_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLS_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DEPT_NAME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DEPT_NAME",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SDF_DPT_001",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SDF_DPT_001",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumTestenvDepartment",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingDepartment",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy WO_SKILLS",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy GL_ACCT_CAT",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT WOK_AUTO_KEY\n, DESCRIPTION\n, SDF_WOK_003\n, SDF_WOK_001\n, SDF_WOK_002\n, BILLING_RATE\nFROM TESTENV.WO_SKILLS",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE TESTENV_WO_SKILLS",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "WOK_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "WOK_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DESCRIPTION",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SDF_WOK_003",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SDF_WOK_003",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SDF_WOK_001",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SDF_WOK_001",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SDF_WOK_002",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SDF_WOK_002",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "BILLING_RATE",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "BILLING_RATE",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumTestenvWoSkills",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingWoSkills",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy GL_ACCOUNT",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy WO_SKILLS",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT GLA_AUTO_KEY\n, ACCOUNT_NUMBER\n, ACCOUNT_TYPE_DESC\n, SYSCM_AUTO_KEY\n, GAC_AUTO_KEY\n, DESCRIPTION\n, GLS_AUTO_KEY0\n, GLS_AUTO_KEY1\n, GLS_AUTO_KEY2\n, GLS_AUTO_KEY3\n, GLS_AUTO_KEY4\n, LEDGER\n, SEQ\n, BUDGETED\n, COSTOFGOODS_FLAG\n, ALLOW_ENTRY\n, REPLACEABLE\n, OTHER_INCOME_FLAG\n, OTHER_EXPENSE_FLAG\n, CONTROL_ACCOUNT_FLAG\nFROM TESTENV.GL_ACCOUNT",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE TESTENV_GL_ACCOUNT",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "GLA_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLA_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "ACCOUNT_NUMBER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ACCOUNT_NUMBER",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ACCOUNT_TYPE_DESC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ACCOUNT_TYPE_DESC",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GAC_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GAC_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DESCRIPTION",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "GLS_AUTO_KEY0",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLS_AUTO_KEY0",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GLS_AUTO_KEY1",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLS_AUTO_KEY1",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GLS_AUTO_KEY2",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLS_AUTO_KEY2",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GLS_AUTO_KEY3",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLS_AUTO_KEY3",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GLS_AUTO_KEY4",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLS_AUTO_KEY4",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "LEDGER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LEDGER",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SEQ",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SEQ",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "BUDGETED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BUDGETED",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "COSTOFGOODS_FLAG",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COSTOFGOODS_FLAG",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ALLOW_ENTRY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ALLOW_ENTRY",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "REPLACEABLE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REPLACEABLE",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OTHER_INCOME_FLAG",
+											"type": "String"
+										},
+										"sink": {
+											"name": "OTHER_INCOME_FLAG",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OTHER_EXPENSE_FLAG",
+											"type": "String"
+										},
+										"sink": {
+											"name": "OTHER_EXPENSE_FLAG",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CONTROL_ACCOUNT_FLAG",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CONTROL_ACCOUNT_FLAG",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumTestenvGLAccount",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingGLAccount",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Quantum GL_JOURNAL",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy Quantum DEPARTMENT",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT GLJ_AUTO_KEY\n, CODE\n, DESCRIPTION\nFROM TESTENV.GL_JOURNAL",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE TESTENV_GL_JOURNAL",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "GLJ_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLJ_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DESCRIPTION",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumTestenvGLJournal",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingGLJournal",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Quantum GL_DISTRIBUTION",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy Quantum GL_PERIOD",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT GLD_AUTO_KEY\n, GLJ_AUTO_KEY\n, GLA_AUTO_KEY\n, CODE\n, DESCRIPTION\nFROM TESTENV.GL_DISTRIBUTION",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE TESTENV_GL_DISTRIBUTION",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "GLD_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLD_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GLJ_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLJ_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GLA_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLA_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DESCRIPTION",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumTestenvGLDistribution",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingGLDistribution",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Quantum GL_FISCAL",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT GLF_AUTO_KEY\n, SYSCM_AUTO_KEY\n, DESCRIPTION\nFROM TESTENV.GL_FISCAL",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE TESTENV_GL_FISCAL",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "GLF_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLF_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DESCRIPTION",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumTestenvGLFiscal",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingGLFiscal",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Quantum GL_PERIOD",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy Quantum GL_FISCAL",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT GLP_AUTO_KEY\n, GLF_AUTO_KEY\n, FISCAL_START\n, FISCAL_END\n, GLP_FORWARD\n, GLP_LAST\n, IS_ACTIVE\n, BUDGET_PERIOD\n, FYE_PERIOD\nFROM TESTENV.GL_PERIOD",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE TESTENV_GL_PERIOD",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "GLP_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLP_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GLF_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLF_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "FISCAL_START",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "FISCAL_START",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "FISCAL_END",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "FISCAL_END",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "GLP_FORWARD",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLP_FORWARD",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "GLP_LAST",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GLP_LAST",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "IS_ACTIVE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "IS_ACTIVE",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "BUDGET_PERIOD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BUDGET_PERIOD",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "FYE_PERIOD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FYE_PERIOD",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumTestenvGLPeriod",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingGLPeriod",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -934,7 +2650,21 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/StagingGLAcctCat')]"
+				"[concat(variables('factoryId'), '/datasets/StagingSysCompanies')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGeoCodes')]",
+				"[concat(variables('factoryId'), '/datasets/StagingCountryCodes')]",
+				"[concat(variables('factoryId'), '/datasets/StagingDivision')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLSegment')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLAcctCat')]",
+				"[concat(variables('factoryId'), '/datasets/StagingDepartment')]",
+				"[concat(variables('factoryId'), '/datasets/StagingWoSkills')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLAccount')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLJournal')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLDistribution')]",
+				"[concat(variables('factoryId'), '/datasets/QuantumTestenvGLFiscal')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLFiscal')]",
+				"[concat(variables('factoryId'), '/datasets/QuantumTestenvGLPeriod')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLPeriod')]"
 			]
 		}
 	]
