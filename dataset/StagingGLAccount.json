@@ -1,0 +1,67 @@
+{
+	"name": "StagingGLAccount",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "GAC_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "GAC_PARENT",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SYSCM_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "ACCOUNT_TYPE",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SEQ",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SDF_GAC_001",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COSTOFGOODS_FLAG",
+				"type": "nchar"
+			},
+			{
+				"name": "OTHER_INCOME_FLAG",
+				"type": "nchar"
+			},
+			{
+				"name": "OTHER_EXPENSE_FLAG",
+				"type": "nchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_GL_ACCOUNT"
+		}
+	}
+}
