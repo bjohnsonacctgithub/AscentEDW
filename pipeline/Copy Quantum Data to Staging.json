@@ -959,6 +959,134 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy WO_SKILLS",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy GL_ACCT_CAT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT WOK_AUTO_KEY\n, DESCRIPTION\n, SDF_WOK_003\n, SDF_WOK_001\n, SDF_WOK_002\n, BILLING_RATE\nFROM TESTENV.WO_SKILLS",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE TESTENV_WO_SKILLS",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "WOK_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "WOK_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SDF_WOK_003",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_WOK_003",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SDF_WOK_001",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_WOK_001",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SDF_WOK_002",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_WOK_002",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BILLING_RATE",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BILLING_RATE",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumTestenvWoSkills",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingWoSkills",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
