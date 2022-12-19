@@ -1683,6 +1683,41 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy Quantum GL_PERIOD",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy Quantum GL_FISCAL",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT GLP_AUTO_KEY\n, GLF_AUTO_KEY\n, FISCAL_START\n, FISCAL_END\n, GLP_FORWARD\n, GLP_LAST\n, IS_ACTIVE\n, BUDGET_PERIOD\n, FYE_PERIOD\nFROM TESTENV.GL_PERIOD",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumTestenvGLPeriod",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
