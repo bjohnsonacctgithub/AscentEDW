@@ -15,6 +15,12 @@
 				"scale": 0
 			},
 			{
+				"name": "GLF_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
 				"name": "FISCAL_START",
 				"type": "date"
 			},
