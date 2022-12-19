@@ -1482,7 +1482,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy GL_ACCOUNT",
+						"activity": "Copy Quantum GL_PERIOD",
 						"dependencyConditions": [
 							"Completed"
 						]
