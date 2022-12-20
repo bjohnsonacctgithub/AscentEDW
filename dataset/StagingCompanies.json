@@ -1,0 +1,103 @@
+{
+	"name": "StagingCompanies",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CMP_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "COMPANY_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COMPANY_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COMPANY_ABBREV",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ADDRESS1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ADDRESS2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ADDRESS3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ZIP_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COUNTRY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIP_ADDRESS1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIP_ADDRESS2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIP_ADDRESS3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIP_CITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIP_STATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIP_ZIP_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIP_COUNTRY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SITE_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PHONE_NUMBER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ALT_PHONE_NUMBER",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_COMPANIES"
+		}
+	}
+}
