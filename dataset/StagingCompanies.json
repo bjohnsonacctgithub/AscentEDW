@@ -93,6 +93,14 @@
 			{
 				"name": "ALT_PHONE_NUMBER",
 				"type": "nvarchar"
+			},
+			{
+				"name": "CUSTOMER_FLAG",
+				"type": "nchar"
+			},
+			{
+				"name": "VENDOR_FLAG",
+				"type": "nchar"
 			}
 		],
 		"typeProperties": {
