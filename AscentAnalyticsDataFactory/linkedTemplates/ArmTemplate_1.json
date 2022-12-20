@@ -6,6 +6,14 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "AscentAnalyticsDataFactory"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureSqlDatabase2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'"
 		}
 	},
 	"variables": {
@@ -13,7 +21,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLPeriod')]",
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvWoSkills')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -26,29 +34,160 @@
 				"schema": [],
 				"typeProperties": {
 					"schema": "TESTENV",
-					"table": "GL_PERIOD"
+					"table": "WO_SKILLS"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLFiscal')]",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase2_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingCompanies')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "Oracle1",
+					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CMP_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "COMPANY_CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COMPANY_NAME",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COMPANY_ABBREV",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ADDRESS1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ADDRESS2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ADDRESS3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CITY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "STATE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ZIP_CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COUNTRY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIP_ADDRESS1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIP_ADDRESS2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIP_ADDRESS3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIP_CITY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIP_STATE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIP_ZIP_CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIP_COUNTRY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SITE_CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PHONE_NUMBER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ALT_PHONE_NUMBER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CUSTOMER_FLAG",
+						"type": "nchar"
+					},
+					{
+						"name": "VENDOR_FLAG",
+						"type": "nchar"
+					}
+				],
 				"typeProperties": {
-					"schema": "TESTENV",
-					"table": "GL_FISCAL"
+					"schema": "dbo",
+					"table": "TESTENV_COMPANIES"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StagingCountryCodes')]",
@@ -82,7 +221,9 @@
 					"table": "TESTENV_COUNTRY_CODES"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StagingDepartment')]",
@@ -134,7 +275,9 @@
 					"table": "TESTENV_DEPARTMENT"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StagingDivision')]",
@@ -174,7 +317,9 @@
 					"table": "TESTENV_DIVISION"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StagingGLAccount')]",
@@ -292,7 +437,9 @@
 					"table": "TESTENV_GL_ACCOUNT"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StagingGLAcctCat')]",
@@ -362,7 +509,197 @@
 					"table": "TESTENV_GL_ACCT_CAT"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLDistribution')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLD_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLJ_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLA_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_DISTRIBUTION"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLFiscal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLF_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_FISCAL"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLJournal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLJ_AUTO_KEY\r\nGLJ_AUTO_KEY\r\nGLJ_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_JOURNAL"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLPeriod')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLP_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLF_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "FISCAL_START",
+						"type": "date"
+					},
+					{
+						"name": "FISCAL_END",
+						"type": "date"
+					},
+					{
+						"name": "GLP_FORWARD",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLP_LAST",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "IS_ACTIVE",
+						"type": "nchar"
+					},
+					{
+						"name": "BUDGET_PERIOD",
+						"type": "nchar"
+					},
+					{
+						"name": "FYE_PERIOD",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_PERIOD"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StagingGLSegment')]",
@@ -416,7 +753,9 @@
 					"table": "TESTENV_GL_SEGMENT"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StagingGeoCodes')]",
@@ -454,7 +793,9 @@
 					"table": "TESTENV_GEO_CODES"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StagingSysCompanies')]",
@@ -533,7 +874,9 @@
 					"table": "TESTENV_SYS_COMPANIES"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StagingWoSkills')]",
@@ -581,187 +924,9 @@
 					"table": "TESTENV_WO_SKILLS"
 				}
 			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingGLJournal')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "GLJ_AUTO_KEY\r\nGLJ_AUTO_KEY\r\nGLJ_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "CODE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_GL_JOURNAL"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingGLDistribution')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "GLD_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLJ_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLA_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "CODE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_GL_DISTRIBUTION"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingGLFiscal')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "GLF_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "SYSCM_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_GL_FISCAL"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingGLPeriod')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "GLP_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLF_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "FISCAL_START",
-						"type": "date"
-					},
-					{
-						"name": "FISCAL_END",
-						"type": "date"
-					},
-					{
-						"name": "GLP_FORWARD",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLP_LAST",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "IS_ACTIVE",
-						"type": "nchar"
-					},
-					{
-						"name": "BUDGET_PERIOD",
-						"type": "nchar"
-					},
-					{
-						"name": "FYE_PERIOD",
-						"type": "nchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_GL_PERIOD"
-				}
-			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Copy Quantum Data to Staging')]",
@@ -2388,7 +2553,14 @@
 					{
 						"name": "Copy Quantum GL_FISCAL",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Copy Quantum COMPANIES",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -2641,6 +2813,314 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy Quantum COMPANIES",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT CMP_AUTO_KEY\n, COMPANY_CODE\n, COMPANY_NAME\n, COMPANY_ABBREV\n, ADDRESS1\n, ADDRESS2\n, ADDRESS3\n, CITY\n, STATE\n, ZIP_CODE\n, COUNTRY\n, SHIP_ADDRESS1\n, SHIP_ADDRESS2\n, SHIP_ADDRESS3\n, SHIP_CITY\n, SHIP_STATE\n, SHIP_ZIP_CODE\n, SHIP_COUNTRY\n, SITE_CODE\n, PHONE_NUMBER\n, ALT_PHONE_NUMBER\n, CUSTOMER_FLAG\n, VENDOR_FLAG\nFROM TESTENV.COMPANIES",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE TESTENV_COMPANIES",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CMP_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "CMP_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "COMPANY_CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COMPANY_CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "COMPANY_NAME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COMPANY_NAME",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "COMPANY_ABBREV",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COMPANY_ABBREV",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ADDRESS1",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ADDRESS1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ADDRESS2",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ADDRESS2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ADDRESS3",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ADDRESS3",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CITY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CITY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "STATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "STATE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ZIP_CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ZIP_CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "COUNTRY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COUNTRY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIP_ADDRESS1",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIP_ADDRESS1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIP_ADDRESS2",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIP_ADDRESS2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIP_ADDRESS3",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIP_ADDRESS3",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIP_CITY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIP_CITY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIP_STATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIP_STATE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIP_ZIP_CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIP_ZIP_CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIP_COUNTRY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIP_COUNTRY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SITE_CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SITE_CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "PHONE_NUMBER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PHONE_NUMBER",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ALT_PHONE_NUMBER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ALT_PHONE_NUMBER",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CUSTOMER_FLAG",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CUSTOMER_FLAG",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VENDOR_FLAG",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VENDOR_FLAG",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumTestenvCompanies",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingCompanies",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -2657,14 +3137,14 @@
 				"[concat(variables('factoryId'), '/datasets/StagingGLSegment')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLAcctCat')]",
 				"[concat(variables('factoryId'), '/datasets/StagingDepartment')]",
+				"[concat(variables('factoryId'), '/datasets/QuantumTestenvWoSkills')]",
 				"[concat(variables('factoryId'), '/datasets/StagingWoSkills')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLAccount')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLJournal')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLDistribution')]",
-				"[concat(variables('factoryId'), '/datasets/QuantumTestenvGLFiscal')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLFiscal')]",
-				"[concat(variables('factoryId'), '/datasets/QuantumTestenvGLPeriod')]",
-				"[concat(variables('factoryId'), '/datasets/StagingGLPeriod')]"
+				"[concat(variables('factoryId'), '/datasets/StagingGLPeriod')]",
+				"[concat(variables('factoryId'), '/datasets/StagingCompanies')]"
 			]
 		}
 	]
