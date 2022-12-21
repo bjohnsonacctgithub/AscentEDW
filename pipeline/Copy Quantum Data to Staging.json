@@ -1859,7 +1859,14 @@
 			{
 				"name": "Copy Quantum COMPANIES",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy Quantum SYS_USERS",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -2158,6 +2165,263 @@
 				"outputs": [
 					{
 						"referenceName": "StagingCompanies",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy Quantum SYS_USERS",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT SYSUR_AUTO_KEY\n, EMPLOYEE_CODE\n, USER_NAME\n, USER_ID\n, FIRST_NAME\n, MIDDLE_NAME\n, LAST_NAME\n, EMAIL_ADDRESS\n, START_DATE\n, END_DATE\n, BIRTH_DATE\n, WOK_AUTO_KEY\n, SYSCM_AUTO_KEY\n, PHONE_NUMBER\n, LICENSE_TYPE\n, LICENSE_NUMBER\n, SYSUR_TA_SUPER\n, OVER_TIME\n, CONTRACTOR\nFROM TESTENV.SYS_USERS",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE TESTENV_SYS_USERS",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "SYSUR_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSUR_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "EMPLOYEE_CODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EMPLOYEE_CODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "USER_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USER_NAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "USER_ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USER_ID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FIRST_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FIRST_NAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MIDDLE_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MIDDLE_NAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LAST_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LAST_NAME",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "START_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "START_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "END_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "END_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "BIRTH_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "BIRTH_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "WOK_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "WOK_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "PHONE_NUMBER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PHONE_NUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LICENSE_TYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LICENSE_TYPE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LICENSE_NUMBER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LICENSE_NUMBER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SYSUR_TA_SUPER",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSUR_TA_SUPER",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "OVER_TIME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OVER_TIME",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CONTRACTOR",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CONTRACTOR",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumTestenvSysUsers",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingSysUsers",
 						"type": "DatasetReference"
 					}
 				]
