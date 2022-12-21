@@ -1,0 +1,97 @@
+{
+	"name": "StagingSysUsers",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "SYSUR_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "EMPLOYEE_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "USER_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "USER_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FIRST_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MIDDLE_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAST_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "START_DATE",
+				"type": "date"
+			},
+			{
+				"name": "END_DATE",
+				"type": "date"
+			},
+			{
+				"name": "BIRTH_DATE",
+				"type": "date"
+			},
+			{
+				"name": "WOK_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SYSCM_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "PHONE_NUMBER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LICENSE_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LICENSE_NUMBER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SYSUR_TA_SUPER",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "OVER_TIME",
+				"type": "nchar"
+			},
+			{
+				"name": "CONTRACTOR",
+				"type": "nchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_SYS_USERS"
+		}
+	}
+}
