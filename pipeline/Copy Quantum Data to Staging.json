@@ -2280,6 +2280,17 @@
 							},
 							{
 								"source": {
+									"name": "EMAIL_ADDRESS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EMAIL_ADDRESS",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
 									"name": "START_DATE",
 									"type": "DateTime"
 								},
