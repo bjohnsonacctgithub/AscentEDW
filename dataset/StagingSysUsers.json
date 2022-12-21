@@ -39,6 +39,10 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "EMAIL_ADDRESS",
+				"type": "nvarchar"
+			},
+			{
 				"name": "START_DATE",
 				"type": "date"
 			},
