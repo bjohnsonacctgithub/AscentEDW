@@ -59,6 +59,25 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvWoTaskType')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TESTENV",
+					"table": "WO_TASK_TYPE"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -93,7 +112,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/QuantumTestenvWoTaskType')]",
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgEfficiencyDetailTab')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -105,8 +124,46 @@
 				"type": "OracleTable",
 				"schema": [],
 				"typeProperties": {
-					"schema": "TESTENV",
-					"table": "WO_TASK_TYPE"
+					"schema": "MROUPG",
+					"table": "EFFICIENCY_DETAIL_TAB"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgDivisionWorkedHours')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "MROUPG",
+					"table": "DIVISION_WORKED_HOURS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgDivisionPayPostings')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "MROUPG",
+					"table": "DIVISION_PAY_POSTINGS"
 				}
 			},
 			"dependsOn": []
@@ -829,243 +886,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "TESTENV_GEO_CODES"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingSysCompanies')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "SYSCM_AUTO_KEY",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SDF_SYSCM_001",
-						"type": "nvarchar"
-					},
-					{
-						"name": "COMPANY_NAME",
-						"type": "nvarchar"
-					},
-					{
-						"name": "COMPANY_ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ADDRESS1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ADDRESS2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ADDRESS3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CITY",
-						"type": "nvarchar"
-					},
-					{
-						"name": "STATE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ZIPCODE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "COUNTRY",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SHIP_NAME",
-						"type": "nvarchar"
-					},
-					{
-						"name": "FAA_NUMBER",
-						"type": "nvarchar"
-					},
-					{
-						"name": "GLA_EQUITY",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_SYS_COMPANIES"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingSysUsers')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "SYSUR_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "EMPLOYEE_CODE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "USER_NAME",
-						"type": "nvarchar"
-					},
-					{
-						"name": "USER_ID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "FIRST_NAME",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MIDDLE_NAME",
-						"type": "nvarchar"
-					},
-					{
-						"name": "LAST_NAME",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EMAIL_ADDRESS",
-						"type": "nvarchar"
-					},
-					{
-						"name": "START_DATE",
-						"type": "date"
-					},
-					{
-						"name": "END_DATE",
-						"type": "date"
-					},
-					{
-						"name": "BIRTH_DATE",
-						"type": "date"
-					},
-					{
-						"name": "WOK_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "SYSCM_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "PHONE_NUMBER",
-						"type": "nvarchar"
-					},
-					{
-						"name": "LICENSE_TYPE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "LICENSE_NUMBER",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SYSUR_TA_SUPER",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "OVER_TIME",
-						"type": "nchar"
-					},
-					{
-						"name": "CONTRACTOR",
-						"type": "nchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_SYS_USERS"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingWoSkills')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "WOK_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SDF_WOK_003",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SDF_WOK_001",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SDF_WOK_002",
-						"type": "nvarchar"
-					},
-					{
-						"name": "BILLING_RATE",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 19
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_WO_SKILLS"
 				}
 			},
 			"dependsOn": [

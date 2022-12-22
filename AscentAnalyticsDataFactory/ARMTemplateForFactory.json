@@ -36,7 +36,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/Copy Quantum Data to Staging')]",
+			"name": "[concat(parameters('factoryName'), '/Copy Quantum Dim Data to Staging')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -3066,6 +3066,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvWoTaskType')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TESTENV",
+					"table": "WO_TASK_TYPE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/StagingCompanies')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -4027,6 +4048,50 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/StagingWoTaskType')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "WOT_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "WOT_SDF_001",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TASK_TYPE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BASE_TYPE",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_WO_TASK_TYPE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -4163,7 +4228,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/QuantumTestenvWoTaskType')]",
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgEfficiencyDetailTab')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -4175,8 +4240,8 @@
 				"type": "OracleTable",
 				"schema": [],
 				"typeProperties": {
-					"schema": "TESTENV",
-					"table": "WO_TASK_TYPE"
+					"schema": "MROUPG",
+					"table": "EFFICIENCY_DETAIL_TAB"
 				}
 			},
 			"dependsOn": [
@@ -4184,7 +4249,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/StagingWoTaskType')]",
+			"name": "[concat(parameters('factoryName'), '/StagingEfficiencyDetailTab')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -4196,31 +4261,911 @@
 				"type": "AzureSqlTable",
 				"schema": [
 					{
+						"name": "DPT_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYS_UR_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "WORK_DATE",
+						"type": "date"
+					},
+					{
 						"name": "WOT_AUTO_KEY",
 						"type": "decimal",
 						"precision": 22,
 						"scale": 0
 					},
 					{
-						"name": "WOT_SDF_001",
-						"type": "nvarchar"
+						"name": "WTP_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
 					},
 					{
-						"name": "TASK_TYPE",
-						"type": "nvarchar"
+						"name": "WOK_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
 					},
 					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
+						"name": "BILLABLE",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
 					},
 					{
-						"name": "BASE_TYPE",
-						"type": "nvarchar"
+						"name": "NON_BILLABLE",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
+					},
+					{
+						"name": "GRAVY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
+					},
+					{
+						"name": "PROJECT_BILL",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
+					},
+					{
+						"name": "PRJ_NB",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
+					},
+					{
+						"name": "SUPPORT_BILL",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
+					},
+					{
+						"name": "SUPPORT_NB",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
+					},
+					{
+						"name": "IN_HOUSE_NON",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
+					},
+					{
+						"name": "REWORK",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
+					},
+					{
+						"name": "TRAINING",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
+					},
+					{
+						"name": "DAMAGE",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 10
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "TESTENV_WO_TASK_TYPE"
+					"table": "MROUPG_EFFICIENCY_DETAIL_TAB"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copy Quantum Fact Data to Staging')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Quantum EFFICIENCY_DETAIL_TAB",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT WOO.DPT_AUTO_KEY\n, EDT.SYS_UR_AUTO_KEY\n, EDT.WORK_DATE\n, EDT.WOT_AUTO_KEY\n, WTP_AUTO_KEY\n, EDT.WOK_AUTO_KEY\n, EDT.BILLABLE\n, EDT.NON_BILLABLE\n, EDT.GRAVY\n, EDT.PROJECT_BILL\n, EDT.PRJ_NB\n, EDT.SUPPORT_BILL\n, EDT.SUPPORT_NB\n, EDT.IN_HOUSE_NON\n, EDT.REWORK\n, EDT.TRAINING\n, EDT.DAMAGE\n, EDT.NPT\nFROM MROUPG.EFFICIENCY_DETAIL_TAB EDT\n, TESTENV.WO_TASK WOT\n, TESTENV.WO_OPERATION WOO\n, TESTENV.WO_TASK_MASTER WTM\nWHERE EDT.WOT_AUTO_KEY = WOT.WOT_AUTO_KEY\nAND WOT.WOO_AUTO_KEY = WOO.WOO_AUTO_KEY\nAND WOT.WTM_AUTO_KEY = WTM.WTM_AUTO_KEY\nAND WORK_DATE >= TO_DATE('01/01/2018', 'MM/DD/YYYY')",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE MROUPG_EFFICIENCY_DETAIL_TAB",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "DPT_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "DPT_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SYS_UR_AUTO_KEY",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "SYS_UR_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "WORK_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "WORK_DATE",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "WOT_AUTO_KEY",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "WOT_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "WTP_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "WTP_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "WOK_AUTO_KEY",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "WOK_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "BILLABLE",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "BILLABLE",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "NON_BILLABLE",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "NON_BILLABLE",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "GRAVY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GRAVY",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "PROJECT_BILL",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "PROJECT_BILL",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "PRJ_NB",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "PRJ_NB",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "SUPPORT_BILL",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SUPPORT_BILL",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "SUPPORT_NB",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SUPPORT_NB",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "IN_HOUSE_NON",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "IN_HOUSE_NON",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "REWORK",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "REWORK",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "TRAINING",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "TRAINING",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "DAMAGE",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "DAMAGE",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "NPT",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "NPT",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumMroupgEfficiencyDetailTab",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingEfficiencyDetailTab",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Quantum DIVISION_PAY_POSTINGS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT DIV_AUTO_KEY\n, SYSUR_AUTO_KEY\n, POST_DATE\n, SYSCM_AUTO_KEY\n, REG_HOURS\n, OT_HOURS\n, BER_HOURS\n, CALLIN_HOURS\n, JUR_HOURS\n, HOL_HOURS\n, PTO_HOURS\n, VAC_HOURS\nFROM MROUPG.DIVISION_PAY_POSTINGS\nWHERE POST_DATE >= TO_DATE('01/01/2018', 'MM/DD/YYYY')",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE MROUPG_DIVISION_PAY_POSTINGS",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "DIV_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "DIV_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SYSUR_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SYSUR_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "POST_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "POST_DATE",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "REG_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "REG_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "OT_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "OT_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "BER_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "BER_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "CALLIN_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "CALLIN_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "JUR_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "JUR_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "HOL_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "HOL_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "PTO_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "PTO_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "VAC_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "VAC_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumMroupgDivisionPayPostings",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingDivisionPayPostings",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Quantum DIVISION_WORKED_HOURS",
+						"description": "SELECT DIV_AUTO_KEY\n, SYS_UR_AUTO_KEY\n, WORK_DATE\n, SYSCM_AUTO_KEY\n, SUPPORT_CODE\n, TOTAL_DIV_HOURS\n, USER_DAY_HOURS\nFROM MROUPG.DIVISION_WORKED_HOURS\nWHERE WORK_DATE >= TO_DATE('01/01/2018', 'MM/DD/YYYY')",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy Quantum DIVISION_PAY_POSTINGS",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT DIV_AUTO_KEY\n, SYS_UR_AUTO_KEY\n, WORK_DATE\n, SYSCM_AUTO_KEY\n, SUPPORT_CODE\n, TOTAL_DIV_HOURS\n, USER_DAY_HOURS\nFROM MROUPG.DIVISION_WORKED_HOURS\nWHERE WORK_DATE >= TO_DATE('01/01/2018', 'MM/DD/YYYY')",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE MROUPG_DIVISION_WORKED_HOURS",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "DIV_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "DIV_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SYS_UR_AUTO_KEY",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "SYS_UR_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "WORK_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "WORK_DATE",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SYSCM_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SUPPORT_CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SUPPORT_CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TOTAL_DIV_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "TOTAL_DIV_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "USER_DAY_HOURS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "USER_DAY_HOURS",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumMroupgDivisionWorkedHours",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingDivisionWorkedHours",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/QuantumMroupgEfficiencyDetailTab')]",
+				"[concat(variables('factoryId'), '/datasets/StagingEfficiencyDetailTab')]",
+				"[concat(variables('factoryId'), '/datasets/QuantumMroupgDivisionPayPostings')]",
+				"[concat(variables('factoryId'), '/datasets/StagingDivisionPayPostings')]",
+				"[concat(variables('factoryId'), '/datasets/QuantumMroupgDivisionWorkedHours')]",
+				"[concat(variables('factoryId'), '/datasets/StagingDivisionWorkedHours')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgDivisionWorkedHours')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "MROUPG",
+					"table": "DIVISION_WORKED_HOURS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgDivisionPayPostings')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "MROUPG",
+					"table": "DIVISION_PAY_POSTINGS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingDivisionPayPostings')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DIV_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYSUR_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "POST_DATE",
+						"type": "date"
+					},
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "REG_HOURS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "OT_HOURS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "BER_HOURS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "CALLIN_HOURS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "JUR_HOURS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "HOL_HOURS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "PTO_HOURS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VAC_HOURS",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MROUPG_DIVISION_PAY_POSTINGS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingDivisionWorkedHours')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DIV_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYS_UR_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "WORK_DATE",
+						"type": "date"
+					},
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SUPPORT_CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TOTAL_DIV_HOURS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "USER_DAY_HOURS",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MROUPG_DIVISION_WORKED_HOURS"
 				}
 			},
 			"dependsOn": [
