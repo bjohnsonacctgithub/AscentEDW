@@ -1,5 +1,5 @@
 {
-	"name": "Copy Quantum Data to Staging",
+	"name": "Copy Quantum Dim Data to Staging",
 	"properties": {
 		"activities": [
 			{
