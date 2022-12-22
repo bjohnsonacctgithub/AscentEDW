@@ -1,0 +1,117 @@
+{
+	"name": "StagingEfficiencyDetailTab",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DPT_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SYS_UR_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "WORK_DATE",
+				"type": "date"
+			},
+			{
+				"name": "WOT_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "WTP_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "WOK_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "BILLABLE",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "NON_BILLABLE",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "GRAVY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "PROJECT_BILL",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "PRJ_NB",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "SUPPORT_BILL",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "SUPPORT_NB",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "IN_HOUSE_NON",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "REWORK",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "TRAINING",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			},
+			{
+				"name": "DAMAGE",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MROUPG_EFFICIENCY_DETAIL_TAB"
+		}
+	}
+}
