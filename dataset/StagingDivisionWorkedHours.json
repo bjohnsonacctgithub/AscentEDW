@@ -1,0 +1,53 @@
+{
+	"name": "StagingDivisionWorkedHours",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DIV_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SYS_UR_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "WORK_DATE",
+				"type": "date"
+			},
+			{
+				"name": "SYSCM_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SUPPORT_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOTAL_DIV_HOURS",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "USER_DAY_HOURS",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MROUPG_DIVISION_WORKED_HOURS"
+		}
+	}
+}
