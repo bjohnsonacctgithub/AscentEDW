@@ -479,8 +479,10 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE MROUPG_DIVISION_WORKED_HOURS",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
