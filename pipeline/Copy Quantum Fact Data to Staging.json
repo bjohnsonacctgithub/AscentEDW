@@ -1,0 +1,256 @@
+{
+	"name": "Copy Quantum Fact Data to Staging",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Quantum EFFICIENCY_DETAIL_TAB",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT WOO.DPT_AUTO_KEY\n, EDT.SYS_UR_AUTO_KEY\n, EDT.WORK_DATE\n, EDT.WOT_AUTO_KEY\n, WTP_AUTO_KEY\n, EDT.WOK_AUTO_KEY\n, EDT.BILLABLE\n, EDT.NON_BILLABLE\n, EDT.GRAVY\n, EDT.PROJECT_BILL\n, EDT.PRJ_NB\n, EDT.SUPPORT_BILL\n, EDT.SUPPORT_NB\n, EDT.IN_HOUSE_NON\n, EDT.REWORK\n, EDT.TRAINING\n, EDT.DAMAGE\n, EDT.NPT\nFROM MROUPG.EFFICIENCY_DETAIL_TAB EDT\n, TESTENV.WO_TASK WOT\n, TESTENV.WO_OPERATION WOO\n, TESTENV.WO_TASK_MASTER WTM\nWHERE EDT.WOT_AUTO_KEY = WOT.WOT_AUTO_KEY\nAND WOT.WOO_AUTO_KEY = WOO.WOO_AUTO_KEY\nAND WOT.WTM_AUTO_KEY = WTM.WTM_AUTO_KEY\nAND WORK_DATE >= TO_DATE('01/01/2018', 'MM/DD/YYYY')",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE MROUPG_EFFICIENCY_DETAIL_TAB",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DPT_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "DPT_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SYS_UR_AUTO_KEY",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "SYS_UR_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "WORK_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "WORK_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "WOT_AUTO_KEY",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "WOT_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "WTP_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "WTP_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "WOK_AUTO_KEY",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "WOK_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "BILLABLE",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "BILLABLE",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "NON_BILLABLE",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "NON_BILLABLE",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "GRAVY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GRAVY",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "PROJECT_BILL",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "PROJECT_BILL",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "PRJ_NB",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "PRJ_NB",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "SUPPORT_BILL",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SUPPORT_BILL",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "SUPPORT_NB",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SUPPORT_NB",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "IN_HOUSE_NON",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "IN_HOUSE_NON",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "REWORK",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "REWORK",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "TRAINING",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "TRAINING",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "DAMAGE",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "DAMAGE",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumMroupgEfficiencyDetailTab",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingEfficiencyDetailTab",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
