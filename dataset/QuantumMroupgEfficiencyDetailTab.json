@@ -1,0 +1,16 @@
+{
+	"name": "QuantumMroupgEfficiencyDetailTab",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Oracle1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "MROUPG",
+			"table": "EFFICIENCY_DETAIL_TAB"
+		}
+	}
+}
