@@ -2436,6 +2436,114 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy Quantum WO_TASK_TYPE",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT WTP_AUTO_KEY\n, SDF_WTP_001\n, TASK_TYPE\n, DESCRIPTION\n, BASE_TYPE\nFROM TESTENV.WO_TASK_TYPE",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE TESTENV_WO_TASK_TYPE",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "WTP_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "WTP_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SDF_WTP_001",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_WTP_001",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TASK_TYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TASK_TYPE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BASE_TYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BASE_TYPE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumTestenvWoTaskType",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingWoTaskType",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
