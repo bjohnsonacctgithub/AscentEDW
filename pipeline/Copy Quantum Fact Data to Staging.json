@@ -228,6 +228,17 @@
 									"type": "Double",
 									"physicalType": "float"
 								}
+							},
+							{
+								"source": {
+									"name": "NPT",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "NPT",
+									"type": "Double",
+									"physicalType": "float"
+								}
 							}
 						],
 						"typeConversion": true,
