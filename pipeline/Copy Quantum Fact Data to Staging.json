@@ -260,6 +260,195 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy Quantum DIVISION_PAY_POSTINGS",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT DIV_AUTO_KEY\n, SYSUR_AUTO_KEY\n, POST_DATE\n, SYSCM_AUTO_KEY\n, REG_HOURS\n, OT_HOURS\n, BER_HOURS\n, CALLIN_HOURS\n, JUR_HOURS\n, HOL_HOURS\n, PTO_HOURS\n, VAC_HOURS\nFROM MROUPG.DIVISION_PAY_POSTINGS\nWHERE POST_DATE >= TO_DATE('01/01/2018', 'MM/DD/YYYY')",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE MROUPG_DIVISION_PAY_POSTINGS",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DIV_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "DIV_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SYSUR_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSUR_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "POST_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "POST_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "REG_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "REG_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "OT_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "OT_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "BER_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "BER_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "CALLIN_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "CALLIN_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "JUR_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "JUR_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "HOL_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "HOL_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "PTO_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "PTO_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "VAC_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "VAC_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumMroupgDivisionPayPostings",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingDivisionPayPostings",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
