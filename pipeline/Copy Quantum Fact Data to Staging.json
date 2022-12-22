@@ -487,6 +487,91 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DIV_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "DIV_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SYS_UR_AUTO_KEY",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "SYS_UR_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "WORK_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "WORK_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSCM_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SUPPORT_CODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SUPPORT_CODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOTAL_DIV_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "TOTAL_DIV_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "USER_DAY_HOURS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "USER_DAY_HOURS",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
