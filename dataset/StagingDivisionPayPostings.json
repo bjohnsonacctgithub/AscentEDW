@@ -1,0 +1,79 @@
+{
+	"name": "StagingDivisionPayPostings",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DIV_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SYSUR_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "POST_DATE",
+				"type": "date"
+			},
+			{
+				"name": "SYSCM_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "REG_HOURS",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "OT_HOURS",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "BER_HOURS",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "CALLIN_HOURS",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "JUR_HOURS",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "HOL_HOURS",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "PTO_HOURS",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "VAC_HOURS",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MROUPG_DIVISION_PAY_POSTINGS"
+		}
+	}
+}
