@@ -452,6 +452,7 @@
 			},
 			{
 				"name": "Copy Quantum DIVISION_WORKED_HOURS",
+				"description": "SELECT DIV_AUTO_KEY\n, SYS_UR_AUTO_KEY\n, WORK_DATE\n, SYSCM_AUTO_KEY\n, SUPPORT_CODE\n, TOTAL_DIV_HOURS\n, USER_DAY_HOURS\nFROM MROUPG.DIVISION_WORKED_HOURS\nWHERE WORK_DATE >= TO_DATE('01/01/2018', 'MM/DD/YYYY')",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -478,10 +479,8 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE TABLE MROUPG_DIVISION_WORKED_HOURS",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": true,
-						"disableMetricsCollection": false
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
