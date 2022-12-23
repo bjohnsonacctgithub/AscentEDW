@@ -2544,6 +2544,180 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy Quantum SYS_USERS_RATE",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy Quantum WO_TASK_TYPE",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT ID\n, SYSUR_AUTO_KEY\n, EFFECTIVE_DATE\n, RATE\n, PERIOD\n, VERSION\n, DATE_CREATED\n, CREATED_BY\n, LAST_UPDATED\n, UPDATED_BY\nFROM MROUPG.SYS_USERS_RATE\nWHERE DELETE_DATE IS NULL",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE MROUPG_SYS_USERS_RATE",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "SYSUR_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "SYSUR_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "EFFECTIVE_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFECTIVE_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "RATE",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "RATE",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "PERIOD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PERIOD",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VERSION",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VERSION",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 5,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "DATE_CREATED",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DATE_CREATED",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "CREATED_BY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CREATED_BY",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LAST_UPDATED",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "LAST_UPDATED",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "UPDATED_BY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "UPDATED_BY",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumMroupgSysUsersRate",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingSysUsersRate",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
