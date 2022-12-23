@@ -13,6 +13,196 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLJournal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLJ_AUTO_KEY\r\nGLJ_AUTO_KEY\r\nGLJ_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_JOURNAL"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLPeriod')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLP_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLF_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "FISCAL_START",
+						"type": "date"
+					},
+					{
+						"name": "FISCAL_END",
+						"type": "date"
+					},
+					{
+						"name": "GLP_FORWARD",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GLP_LAST",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "IS_ACTIVE",
+						"type": "nchar"
+					},
+					{
+						"name": "BUDGET_PERIOD",
+						"type": "nchar"
+					},
+					{
+						"name": "FYE_PERIOD",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_PERIOD"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLSegment')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLS_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SEGMENT_NUMBER",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "ACCOUNT",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ACCOUNT_TYPE",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "ACCOUNT_TYPE_DESC",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_GLS_002",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_SEGMENT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingGeoCodes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GEO_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GEO_CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_GEO_001",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GEO_CODES"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/StagingSysCompanies')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -286,7 +476,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/StagingEfficiencyDetailTab')]",
+			"name": "[concat(parameters('factoryName'), '/StagingSysUsersRate')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -298,127 +488,7 @@
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "DPT_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "SYS_UR_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "WORK_DATE",
-						"type": "date"
-					},
-					{
-						"name": "WOT_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "WTP_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "WOK_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "BILLABLE",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "NON_BILLABLE",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "GRAVY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "PROJECT_BILL",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "PRJ_NB",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "SUPPORT_BILL",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "SUPPORT_NB",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "IN_HOUSE_NON",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "REWORK",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "TRAINING",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					},
-					{
-						"name": "DAMAGE",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MROUPG_EFFICIENCY_DETAIL_TAB"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingDivisionPayPostings')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "DIV_AUTO_KEY",
+						"name": "ID",
 						"type": "decimal",
 						"precision": 22,
 						"scale": 0
@@ -430,115 +500,43 @@
 						"scale": 0
 					},
 					{
-						"name": "POST_DATE",
+						"name": "EFFECTIVE_DATE",
 						"type": "date"
 					},
 					{
-						"name": "SYSCM_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "REG_HOURS",
+						"name": "RATE",
 						"type": "float",
 						"precision": 15
 					},
 					{
-						"name": "OT_HOURS",
+						"name": "PERIOD",
+						"type": "nchar"
+					},
+					{
+						"name": "VERSION",
 						"type": "float",
 						"precision": 15
 					},
 					{
-						"name": "BER_HOURS",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "CALLIN_HOURS",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "JUR_HOURS",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "HOL_HOURS",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "PTO_HOURS",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "VAC_HOURS",
-						"type": "float",
-						"precision": 15
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MROUPG_DIVISION_PAY_POSTINGS"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingDivisionWorkedHours')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "DIV_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "SYS_UR_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "WORK_DATE",
+						"name": "DATE_CREATED",
 						"type": "date"
 					},
 					{
-						"name": "SYSCM_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "SUPPORT_CODE",
+						"name": "CREATED_BY",
 						"type": "nvarchar"
 					},
 					{
-						"name": "TOTAL_DIV_HOURS",
-						"type": "float",
-						"precision": 15
+						"name": "LAST_UPDATED",
+						"type": "date"
 					},
 					{
-						"name": "USER_DAY_HOURS",
-						"type": "float",
-						"precision": 15
+						"name": "UPDATED_BY",
+						"type": "nvarchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "MROUPG_DIVISION_WORKED_HOURS"
+					"table": "MROUPG_SYS_USERS_RATE"
 				}
 			},
 			"dependsOn": []
@@ -3123,6 +3121,182 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy Quantum SYS_USERS_RATE",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy Quantum WO_TASK_TYPE",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT ID\n, SYSUR_AUTO_KEY\n, EFFECTIVE_DATE\n, RATE\n, PERIOD\n, VERSION\n, DATE_CREATED\n, CREATED_BY\n, LAST_UPDATED\n, UPDATED_BY\nFROM MROUPG.SYS_USERS_RATE\nWHERE DELETE_DATE IS NULL",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE MROUPG_SYS_USERS_RATE",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "ID",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SYSUR_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SYSUR_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "EFFECTIVE_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "EFFECTIVE_DATE",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "RATE",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "RATE",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "PERIOD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PERIOD",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VERSION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "VERSION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DATE_CREATED",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DATE_CREATED",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "CREATED_BY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CREATED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "LAST_UPDATED",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "LAST_UPDATED",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "UPDATED_BY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UPDATED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumMroupgSysUsersRate",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingSysUsersRate",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -3133,9 +3307,14 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/StagingSysCompanies')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGeoCodes')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLSegment')]",
 				"[concat(variables('factoryId'), '/datasets/StagingWoSkills')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLJournal')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLPeriod')]",
 				"[concat(variables('factoryId'), '/datasets/StagingSysUsers')]",
-				"[concat(variables('factoryId'), '/datasets/StagingWoTaskType')]"
+				"[concat(variables('factoryId'), '/datasets/StagingWoTaskType')]",
+				"[concat(variables('factoryId'), '/datasets/StagingSysUsersRate')]"
 			]
 		},
 		{
@@ -3747,11 +3926,7 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/StagingEfficiencyDetailTab')]",
-				"[concat(variables('factoryId'), '/datasets/StagingDivisionPayPostings')]",
-				"[concat(variables('factoryId'), '/datasets/StagingDivisionWorkedHours')]"
-			]
+			"dependsOn": []
 		}
 	]
 }
