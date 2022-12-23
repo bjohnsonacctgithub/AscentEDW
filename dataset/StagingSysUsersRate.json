@@ -1,0 +1,63 @@
+{
+	"name": "StagingSysUsersRate",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SYSUR_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "EFFECTIVE_DATE",
+				"type": "date"
+			},
+			{
+				"name": "RATE",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "PERIOD",
+				"type": "nchar"
+			},
+			{
+				"name": "VERSION",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "DATE_CREATED",
+				"type": "date"
+			},
+			{
+				"name": "CREATED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAST_UPDATED",
+				"type": "date"
+			},
+			{
+				"name": "UPDATED_BY",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MROUPG_SYS_USERS_RATE"
+		}
+	}
+}
