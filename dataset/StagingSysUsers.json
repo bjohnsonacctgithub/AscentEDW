@@ -67,6 +67,12 @@
 				"scale": 0
 			},
 			{
+				"name": "GEO_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
 				"name": "PHONE_NUMBER",
 				"type": "nvarchar"
 			},
