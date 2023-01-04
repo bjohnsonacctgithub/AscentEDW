@@ -9,37 +9,57 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "WOK_AUTO_KEY",
+				"name": "ID",
 				"type": "decimal",
 				"precision": 22,
 				"scale": 0
+			},
+			{
+				"name": "TIME_CODE",
+				"type": "nvarchar"
 			},
 			{
 				"name": "DESCRIPTION",
 				"type": "nvarchar"
 			},
 			{
-				"name": "SDF_WOK_003",
+				"name": "TYPE",
 				"type": "nvarchar"
 			},
 			{
-				"name": "SDF_WOK_001",
-				"type": "nvarchar"
-			},
-			{
-				"name": "SDF_WOK_002",
-				"type": "nvarchar"
-			},
-			{
-				"name": "BILLING_RATE",
+				"name": "VERSION",
 				"type": "decimal",
 				"precision": 22,
-				"scale": 19
+				"scale": 0
+			},
+			{
+				"name": "EXTERNAL_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SD_PAY_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SECONDARY_APPROVAL",
+				"type": "nchar"
+			},
+			{
+				"name": "ABSENCE",
+				"type": "nchar"
+			},
+			{
+				"name": "REQUIRES_ACCRUAL",
+				"type": "nchar"
+			},
+			{
+				"name": "ACTIVE",
+				"type": "nchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "TESTENV_WO_SKILLS"
+			"table": "MROUPG_TIME_CODE"
 		}
 	}
 }
