@@ -2479,7 +2479,14 @@
 			{
 				"name": "Copy Quantum WO_TASK_TYPE",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy Quantum TIME_CODE",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -2754,6 +2761,182 @@
 				"outputs": [
 					{
 						"referenceName": "StagingSysUsersRate",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy Quantum TIME_CODE",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT ID\n, CODE\n, DESCRIPTION\n, TYPE\n, VERSION\n, EXTERNAL_CODE\n, SD_PAY_CODE\n, SECONDARY_APPROVAL\n, ABSENCE\n, REQUIRES_ACCRUAL\n, ACTIVE\nFROM MROUPG.TIME_CODE",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE MROUPG_TIME_CODE",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "CODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TYPE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VERSION",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VERSION",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "EXTERNAL_CODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EXTERNAL_CODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SD_PAY_CODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SD_PAY_CODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SECONDARY_APPROVAL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SECONDARY_APPROVAL",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ABSENCE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ABSENCE",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "REQUIRES_ACCRUAL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "REQUIRES_ACCRUAL",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ACTIVE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACTIVE",
+									"type": "String",
+									"physicalType": "nchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumMroupgTimeCode",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingTimeCode",
 						"type": "DatasetReference"
 					}
 				]
