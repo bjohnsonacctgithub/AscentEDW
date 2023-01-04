@@ -1,0 +1,45 @@
+{
+	"name": "StagingTimeCode",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "WOK_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SDF_WOK_003",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SDF_WOK_001",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SDF_WOK_002",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BILLING_RATE",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_WO_SKILLS"
+		}
+	}
+}
