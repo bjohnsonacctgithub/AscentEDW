@@ -21,6 +21,25 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLPeriod')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TESTENV",
+					"table": "GL_PERIOD"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLSegment')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -169,7 +188,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/QuantumMroupgSysUsersRate')]",
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgTimeCode')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -182,7 +201,7 @@
 				"schema": [],
 				"typeProperties": {
 					"schema": "MROUPG",
-					"table": "SYS_USERS_RATE"
+					"table": "TIME_CODE"
 				}
 			},
 			"dependsOn": []
@@ -933,44 +952,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "TESTENV_GL_DISTRIBUTION"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingGLFiscal')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "GLF_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "SYSCM_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_GL_FISCAL"
 				}
 			},
 			"dependsOn": [

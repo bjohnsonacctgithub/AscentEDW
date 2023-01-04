@@ -281,6 +281,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgSysUsersRate')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "MROUPG",
+					"table": "SYS_USERS_RATE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/QuantumTestenvCompanies')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -463,27 +484,6 @@
 				"typeProperties": {
 					"schema": "TESTENV",
 					"table": "GL_JOURNAL"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLPeriod')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Oracle1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "TESTENV",
-					"table": "GL_PERIOD"
 				}
 			},
 			"dependsOn": [

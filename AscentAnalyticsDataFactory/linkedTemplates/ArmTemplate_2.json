@@ -13,6 +13,42 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLFiscal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GLF_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_FISCAL"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/StagingGLJournal')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -352,6 +388,12 @@
 						"scale": 0
 					},
 					{
+						"name": "GEO_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
 						"name": "PHONE_NUMBER",
 						"type": "nvarchar"
 					},
@@ -376,11 +418,89 @@
 					{
 						"name": "CONTRACTOR",
 						"type": "nchar"
+					},
+					{
+						"name": "DPT_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "CMP_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "TESTENV_SYS_USERS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingSysUsersRate')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYSUR_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "EFFECTIVE_DATE",
+						"type": "date"
+					},
+					{
+						"name": "RATE",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "PERIOD",
+						"type": "nchar"
+					},
+					{
+						"name": "VERSION",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "DATE_CREATED",
+						"type": "date"
+					},
+					{
+						"name": "CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LAST_UPDATED",
+						"type": "date"
+					},
+					{
+						"name": "UPDATED_BY",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MROUPG_SYS_USERS_RATE"
 				}
 			},
 			"dependsOn": []
@@ -476,7 +596,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/StagingSysUsersRate')]",
+			"name": "[concat(parameters('factoryName'), '/StagingTimeCode')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -494,49 +614,51 @@
 						"scale": 0
 					},
 					{
-						"name": "SYSUR_AUTO_KEY",
+						"name": "TIME_CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TYPE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "VERSION",
 						"type": "decimal",
 						"precision": 22,
 						"scale": 0
 					},
 					{
-						"name": "EFFECTIVE_DATE",
-						"type": "date"
+						"name": "EXTERNAL_CODE",
+						"type": "nvarchar"
 					},
 					{
-						"name": "RATE",
-						"type": "float",
-						"precision": 15
+						"name": "SD_PAY_CODE",
+						"type": "nvarchar"
 					},
 					{
-						"name": "PERIOD",
+						"name": "SECONDARY_APPROVAL",
 						"type": "nchar"
 					},
 					{
-						"name": "VERSION",
-						"type": "float",
-						"precision": 15
+						"name": "ABSENCE",
+						"type": "nchar"
 					},
 					{
-						"name": "DATE_CREATED",
-						"type": "date"
+						"name": "REQUIRES_ACCRUAL",
+						"type": "nchar"
 					},
 					{
-						"name": "CREATED_BY",
-						"type": "nvarchar"
-					},
-					{
-						"name": "LAST_UPDATED",
-						"type": "date"
-					},
-					{
-						"name": "UPDATED_BY",
-						"type": "nvarchar"
+						"name": "ACTIVE",
+						"type": "nchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "MROUPG_SYS_USERS_RATE"
+					"table": "MROUPG_TIME_CODE"
 				}
 			},
 			"dependsOn": []
@@ -2757,7 +2879,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT SYSUR_AUTO_KEY\n, EMPLOYEE_CODE\n, USER_NAME\n, USER_ID\n, FIRST_NAME\n, MIDDLE_NAME\n, LAST_NAME\n, EMAIL_ADDRESS\n, START_DATE\n, END_DATE\n, BIRTH_DATE\n, WOK_AUTO_KEY\n, SYSCM_AUTO_KEY\n, PHONE_NUMBER\n, LICENSE_TYPE\n, LICENSE_NUMBER\n, SYSUR_TA_SUPER\n, OVER_TIME\n, CONTRACTOR\nFROM TESTENV.SYS_USERS",
+								"oracleReaderQuery": "SELECT SYSUR_AUTO_KEY\n, EMPLOYEE_CODE\n, USER_NAME\n, USER_ID\n, FIRST_NAME\n, MIDDLE_NAME\n, LAST_NAME\n, EMAIL_ADDRESS\n, START_DATE\n, END_DATE\n, BIRTH_DATE\n, WOK_AUTO_KEY\n, SYSCM_AUTO_KEY\n, GEO_AUTO_KEY\n, PHONE_NUMBER\n, LICENSE_TYPE\n, LICENSE_NUMBER\n, SYSUR_TA_SUPER\n, OVER_TIME\n, CONTRACTOR\n, DPT_AUTO_KEY\n, CMP_AUTO_KEY\nFROM TESTENV.SYS_USERS",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -2923,6 +3045,19 @@
 									},
 									{
 										"source": {
+											"name": "GEO_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "GEO_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
 											"name": "PHONE_NUMBER",
 											"type": "String"
 										},
@@ -2988,6 +3123,32 @@
 											"type": "String",
 											"physicalType": "nchar"
 										}
+									},
+									{
+										"source": {
+											"name": "DPT_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "DPT_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "CMP_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "CMP_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
 									}
 								],
 								"typeConversion": true,
@@ -3015,7 +3176,14 @@
 					{
 						"name": "Copy Quantum WO_TASK_TYPE",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Copy Quantum TIME_CODE",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -3297,6 +3465,184 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy Quantum TIME_CODE",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT ID\n, CODE\n, DESCRIPTION\n, TYPE\n, VERSION\n, EXTERNAL_CODE\n, SD_PAY_CODE\n, SECONDARY_APPROVAL\n, ABSENCE\n, REQUIRES_ACCRUAL\n, ACTIVE\nFROM MROUPG.TIME_CODE",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE MROUPG_TIME_CODE",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "ID",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DESCRIPTION",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TYPE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VERSION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "VERSION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "EXTERNAL_CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "EXTERNAL_CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SD_PAY_CODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SD_PAY_CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SECONDARY_APPROVAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SECONDARY_APPROVAL",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ABSENCE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ABSENCE",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "REQUIRES_ACCRUAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REQUIRES_ACCRUAL",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ACTIVE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ACTIVE",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumMroupgTimeCode",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingTimeCode",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -3311,10 +3657,12 @@
 				"[concat(variables('factoryId'), '/datasets/StagingGLSegment')]",
 				"[concat(variables('factoryId'), '/datasets/StagingWoSkills')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLJournal')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLFiscal')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLPeriod')]",
 				"[concat(variables('factoryId'), '/datasets/StagingSysUsers')]",
 				"[concat(variables('factoryId'), '/datasets/StagingWoTaskType')]",
-				"[concat(variables('factoryId'), '/datasets/StagingSysUsersRate')]"
+				"[concat(variables('factoryId'), '/datasets/StagingSysUsersRate')]",
+				"[concat(variables('factoryId'), '/datasets/StagingTimeCode')]"
 			]
 		},
 		{
