@@ -2184,7 +2184,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT SYSUR_AUTO_KEY\n, EMPLOYEE_CODE\n, USER_NAME\n, USER_ID\n, FIRST_NAME\n, MIDDLE_NAME\n, LAST_NAME\n, EMAIL_ADDRESS\n, START_DATE\n, END_DATE\n, BIRTH_DATE\n, WOK_AUTO_KEY\n, SYSCM_AUTO_KEY\n, PHONE_NUMBER\n, LICENSE_TYPE\n, LICENSE_NUMBER\n, SYSUR_TA_SUPER\n, OVER_TIME\n, CONTRACTOR\nFROM TESTENV.SYS_USERS",
+						"oracleReaderQuery": "SELECT SYSUR_AUTO_KEY\n, EMPLOYEE_CODE\n, USER_NAME\n, USER_ID\n, FIRST_NAME\n, MIDDLE_NAME\n, LAST_NAME\n, EMAIL_ADDRESS\n, START_DATE\n, END_DATE\n, BIRTH_DATE\n, WOK_AUTO_KEY\n, SYSCM_AUTO_KEY\n, GEO_AUTO_KEY\n, PHONE_NUMBER\n, LICENSE_TYPE\n, LICENSE_NUMBER\n, SYSUR_TA_SUPER\n, OVER_TIME\n, CONTRACTOR\nFROM TESTENV.SYS_USERS",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -2342,6 +2342,19 @@
 								},
 								"sink": {
 									"name": "SYSCM_AUTO_KEY",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "GEO_AUTO_KEY",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "GEO_AUTO_KEY",
 									"type": "Decimal",
 									"physicalType": "decimal",
 									"scale": 0,
