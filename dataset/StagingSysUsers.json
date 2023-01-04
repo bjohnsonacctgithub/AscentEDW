@@ -97,6 +97,18 @@
 			{
 				"name": "CONTRACTOR",
 				"type": "nchar"
+			},
+			{
+				"name": "DPT_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "CMP_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
 			}
 		],
 		"typeProperties": {
