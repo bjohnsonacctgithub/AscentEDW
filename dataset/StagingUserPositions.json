@@ -1,0 +1,93 @@
+{
+	"name": "StagingUserPositions",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "URP_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SYSUR_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "START_DATE",
+				"type": "date"
+			},
+			{
+				"name": "END_DATE",
+				"type": "date"
+			},
+			{
+				"name": "POSITION_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LABOR_CLASS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WOK_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "DPT_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "SDF_SYSUR_001",
+				"type": "nchar"
+			},
+			{
+				"name": "CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DIRECT",
+				"type": "nchar"
+			},
+			{
+				"name": "OVERTIME",
+				"type": "nchar"
+			},
+			{
+				"name": "CONTRACTOR",
+				"type": "nchar"
+			},
+			{
+				"name": "EXEMPT",
+				"type": "nchar"
+			},
+			{
+				"name": "SHIFT_DIFF",
+				"type": "nchar"
+			},
+			{
+				"name": "PAID_HOLIDAY",
+				"type": "nchar"
+			},
+			{
+				"name": "INCLUDE_HEAD_COUNT",
+				"type": "nchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_USER_POSITIONS"
+		}
+	}
+}
