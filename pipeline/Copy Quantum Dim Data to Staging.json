@@ -2969,7 +2969,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE TESTENV_USER_POSITIONS",
+						"preCopyScript": "TRUNCATE TABLE TESTENV_USER_POSITIONS",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
