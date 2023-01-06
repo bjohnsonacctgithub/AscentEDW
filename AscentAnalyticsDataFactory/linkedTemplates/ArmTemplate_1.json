@@ -21,6 +21,25 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLJournal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TESTENV",
+					"table": "GL_JOURNAL"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLPeriod')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -188,7 +207,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/QuantumMroupgTimeCode')]",
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvUserPositions')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -200,8 +219,8 @@
 				"type": "OracleTable",
 				"schema": [],
 				"typeProperties": {
-					"schema": "MROUPG",
-					"table": "TIME_CODE"
+					"schema": "TESTENV",
+					"table": "USER_POSITIONS"
 				}
 			},
 			"dependsOn": []
@@ -904,54 +923,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "TESTENV_GL_ACCT_CAT"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingGLDistribution')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "GLD_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLJ_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLA_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "CODE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_GL_DISTRIBUTION"
 				}
 			},
 			"dependsOn": [
