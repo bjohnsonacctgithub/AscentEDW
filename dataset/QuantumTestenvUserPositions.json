@@ -1,0 +1,16 @@
+{
+	"name": "QuantumTestenvUserPositions",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Oracle1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "TESTENV",
+			"table": "USER_POSITIONS"
+		}
+	}
+}
