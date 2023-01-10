@@ -1,0 +1,35 @@
+{
+	"name": "StagingShiftTemplateWeek",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "GEO_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "GEO_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SDF_GEO_001",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TESTENV_GEO_CODES"
+		}
+	}
+}
