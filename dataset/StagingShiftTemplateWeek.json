@@ -9,27 +9,195 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "GEO_AUTO_KEY",
+				"name": "SHIFT_ID4",
 				"type": "decimal",
 				"precision": 22,
 				"scale": 0
 			},
 			{
-				"name": "GEO_CODE",
+				"name": "SYSUR_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "EFFECTIVE_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "START_WEEK",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 2
+			},
+			{
+				"name": "SHIFT_VERSION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 5
+			},
+			{
+				"name": "SHIFT_DELETE_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "SHIFT_DELETED_BY",
 				"type": "nvarchar"
 			},
 			{
-				"name": "DESCRIPTION",
+				"name": "SHIFT_TEMPLATE_ID",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "NAME",
 				"type": "nvarchar"
 			},
 			{
-				"name": "SDF_GEO_001",
+				"name": "ACTIVE",
+				"type": "nchar"
+			},
+			{
+				"name": "SHIFT_TEMPLATE_VERSION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 5
+			},
+			{
+				"name": "SHIFT_TEMPLATE_DELETE_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "SHIFT_TEMPLATE_DELETED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIFT_WEEK_ID",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "WEEK_SEQUENCE",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 2
+			},
+			{
+				"name": "SHIFT_WEEK_VERSION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 5
+			},
+			{
+				"name": "DAY_1_START",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_1_DURATION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_2_START",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_2_DURATION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_3_START",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_3_DURATION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_4_START",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_4_DURATION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_5_START",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_5_DURATION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_6_START",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_6_DURATION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_7_START",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "DAY_7_DURATION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 4
+			},
+			{
+				"name": "SCHED_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SHIFT_WEEK_DELETE_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "SHIFT_WEEK_DELETED_BY",
 				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "TESTENV_GEO_CODES"
+			"table": "MROUPG_SHIFT_TEMPLATE_WEEK"
 		}
 	}
 }
