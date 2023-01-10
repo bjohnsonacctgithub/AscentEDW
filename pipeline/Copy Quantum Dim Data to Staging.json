@@ -3289,7 +3289,7 @@
 								"sink": {
 									"name": "START_DATE",
 									"type": "DateTime",
-									"physicalType": "date"
+									"physicalType": "datetime"
 								}
 							},
 							{
@@ -3300,7 +3300,7 @@
 								"sink": {
 									"name": "END_DATE",
 									"type": "DateTime",
-									"physicalType": "date"
+									"physicalType": "datetime"
 								}
 							},
 							{
@@ -3322,7 +3322,7 @@
 								"sink": {
 									"name": "CLOSED_DATE",
 									"type": "DateTime",
-									"physicalType": "date"
+									"physicalType": "datetime"
 								}
 							},
 							{
@@ -3344,7 +3344,7 @@
 								"sink": {
 									"name": "DATE_CREATED",
 									"type": "DateTime",
-									"physicalType": "date"
+									"physicalType": "datetime"
 								}
 							},
 							{
@@ -3355,7 +3355,7 @@
 								"sink": {
 									"name": "LAST_UPDATED",
 									"type": "DateTime",
-									"physicalType": "date"
+									"physicalType": "datetime"
 								}
 							}
 						],
