@@ -13,6 +13,76 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/StagingGLAcctCat')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GAC_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "GAC_PARENT",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "ACCOUNT_TYPE",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SEQ",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_GAC_001",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COSTOFGOODS_FLAG",
+						"type": "nchar"
+					},
+					{
+						"name": "OTHER_INCOME_FLAG",
+						"type": "nchar"
+					},
+					{
+						"name": "OTHER_EXPENSE_FLAG",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_GL_ACCT_CAT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/StagingGLDistribution')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -620,96 +690,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/StagingWoSkills')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "WOK_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SDF_WOK_003",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SDF_WOK_001",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SDF_WOK_002",
-						"type": "nvarchar"
-					},
-					{
-						"name": "BILLING_RATE",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 19
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_WO_SKILLS"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingWoTaskType')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "WOT_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "WOT_SDF_001",
-						"type": "nvarchar"
-					},
-					{
-						"name": "TASK_TYPE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
-					},
-					{
-						"name": "BASE_TYPE",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_WO_TASK_TYPE"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/StagingUserPositions')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -801,6 +781,166 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "TESTENV_USER_POSITIONS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingWoSkills')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "WOK_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_WOK_003",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_WOK_001",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_WOK_002",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BILLING_RATE",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 19
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_WO_SKILLS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingWoTaskType')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "WOT_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "WOT_SDF_001",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TASK_TYPE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BASE_TYPE",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TESTENV_WO_TASK_TYPE"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingPayPeriodInstance')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "STATUS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PAY_PERIOD_ID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "VERSION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "START_DATE",
+						"type": "date"
+					},
+					{
+						"name": "END_DATE",
+						"type": "date"
+					},
+					{
+						"name": "ACCRUAL_STATUS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CLOSED_DATE",
+						"type": "date"
+					},
+					{
+						"name": "CLOSED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DATE_CREATED",
+						"type": "date"
+					},
+					{
+						"name": "LAST_UPDATED",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MROUPG_PAY_PERIOD_INSTANCE"
 				}
 			},
 			"dependsOn": []
@@ -3796,7 +3936,14 @@
 					{
 						"name": "Copy Quantum USER_POSITIONS",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Copy Quantum PAY_PERIOD_INSTANCE",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -4040,6 +4187,186 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy Quantum PAY_PERIOD_INSTANCE",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT ID\n, STATUS\n, PAY_PERIOD_ID\n, VERSION\n, START_DATE\n, END_DATE\n, ACCRUAL_STATUS\n, CLOSED_DATE\n, CLOSED_BY\n, DATE_CREATED\n, LAST_UPDATED\nFROM MROUPG.PAY_PERIOD_INSTANCE",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE MROUPG_PAY_PERIOD_INSTANCE",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "ID",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "STATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "STATUS",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "PAY_PERIOD_ID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "PAY_PERIOD_ID",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "VERSION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "VERSION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "START_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "START_DATE",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "END_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "END_DATE",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "ACCRUAL_STATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ACCRUAL_STATUS",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CLOSED_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "CLOSED_DATE",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "CLOSED_BY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLOSED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DATE_CREATED",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DATE_CREATED",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "LAST_UPDATED",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "LAST_UPDATED",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumMroupgPayPeriodInstance",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingPayPeriodInstance",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -4052,6 +4379,7 @@
 				"[concat(variables('factoryId'), '/datasets/StagingSysCompanies')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGeoCodes')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLSegment')]",
+				"[concat(variables('factoryId'), '/datasets/StagingGLAcctCat')]",
 				"[concat(variables('factoryId'), '/datasets/StagingWoSkills')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLJournal')]",
 				"[concat(variables('factoryId'), '/datasets/StagingGLDistribution')]",
@@ -4061,7 +4389,8 @@
 				"[concat(variables('factoryId'), '/datasets/StagingWoTaskType')]",
 				"[concat(variables('factoryId'), '/datasets/StagingSysUsersRate')]",
 				"[concat(variables('factoryId'), '/datasets/StagingTimeCode')]",
-				"[concat(variables('factoryId'), '/datasets/StagingUserPositions')]"
+				"[concat(variables('factoryId'), '/datasets/StagingUserPositions')]",
+				"[concat(variables('factoryId'), '/datasets/StagingPayPeriodInstance')]"
 			]
 		},
 		{
