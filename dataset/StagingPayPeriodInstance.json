@@ -9,29 +9,59 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "DIV_AUTO_KEY",
+				"name": "ID",
 				"type": "decimal",
 				"precision": 22,
 				"scale": 0
 			},
 			{
-				"name": "SYSCM_AUTO_KEY",
+				"name": "STATUS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PAY_PERIOD_ID",
 				"type": "decimal",
 				"precision": 22,
 				"scale": 0
 			},
 			{
-				"name": "SDF_DIV_001",
+				"name": "VERSION",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "START_DATE",
+				"type": "date"
+			},
+			{
+				"name": "END_DATE",
+				"type": "date"
+			},
+			{
+				"name": "ACCRUAL_STATUS",
 				"type": "nvarchar"
 			},
 			{
-				"name": "DIVISION_NAME",
+				"name": "CLOSED_DATE",
+				"type": "date"
+			},
+			{
+				"name": "CLOSED_BY",
 				"type": "nvarchar"
+			},
+			{
+				"name": "DATE_CREATED",
+				"type": "date"
+			},
+			{
+				"name": "LAST_UPDATED",
+				"type": "date"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "TESTENV_DIVISION"
+			"table": "MROUPG_PAY_PERIOD_INSTANCE"
 		}
 	}
 }
