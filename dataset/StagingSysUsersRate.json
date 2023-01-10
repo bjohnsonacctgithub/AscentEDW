@@ -22,7 +22,9 @@
 			},
 			{
 				"name": "EFFECTIVE_DATE",
-				"type": "date"
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
 			},
 			{
 				"name": "RATE",
@@ -35,12 +37,15 @@
 			},
 			{
 				"name": "VERSION",
-				"type": "float",
-				"precision": 15
+				"type": "decimal",
+				"precision": 22,
+				"scale": 5
 			},
 			{
 				"name": "DATE_CREATED",
-				"type": "date"
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
 			},
 			{
 				"name": "CREATED_BY",
@@ -48,11 +53,19 @@
 			},
 			{
 				"name": "LAST_UPDATED",
-				"type": "date"
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
 			},
 			{
 				"name": "UPDATED_BY",
 				"type": "nvarchar"
+			},
+			{
+				"name": "DELETE_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
 			}
 		],
 		"typeProperties": {
