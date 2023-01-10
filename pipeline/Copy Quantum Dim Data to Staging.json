@@ -2613,7 +2613,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT ID\n, SYSUR_AUTO_KEY\n, EFFECTIVE_DATE\n, RATE\n, PERIOD\n, VERSION\n, DATE_CREATED\n, CREATED_BY\n, LAST_UPDATED\n, UPDATED_BY\nFROM MROUPG.SYS_USERS_RATE\nWHERE DELETE_DATE IS NULL",
+						"oracleReaderQuery": "SELECT ID\n, SYSUR_AUTO_KEY\n, EFFECTIVE_DATE\n, RATE\n, PERIOD\n, VERSION\n, DATE_CREATED\n, CREATED_BY\n, LAST_UPDATED\n, UPDATED_BY\n, DELETE_DATE\nFROM MROUPG.SYS_USERS_RATE\nWHERE DELETE_DATE IS NULL",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -2742,6 +2742,17 @@
 									"name": "UPDATED_BY",
 									"type": "String",
 									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DELETE_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DELETE_DATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
