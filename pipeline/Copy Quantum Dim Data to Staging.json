@@ -2951,7 +2951,14 @@
 			{
 				"name": "Copy Quantum USER_POSITIONS",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy Quantum PAY_PERIOD_INSTANCE",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -3190,6 +3197,184 @@
 				"outputs": [
 					{
 						"referenceName": "StagingUserPositions",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy Quantum PAY_PERIOD_INSTANCE",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT ID\n, STATUS\n, PAY_PERIOD_ID\n, VERSION\n, START_DATE\n, END_DATE\n, ACCRUAL_STATUS\n, CLOSED_DATE\n, CLOSED_BY\n, DATE_CREATED\n, LAST_UPDATED\nFROM MROUPG.PAY_PERIOD_INSTANCE",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE MROUPG_PAY_PERIOD_INSTANCE",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "STATUS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "STATUS",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PAY_PERIOD_ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "PAY_PERIOD_ID",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "VERSION",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VERSION",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "START_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "START_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "END_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "END_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "ACCRUAL_STATUS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCRUAL_STATUS",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CLOSED_DATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "CLOSED_DATE",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "CLOSED_BY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLOSED_BY",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DATE_CREATED",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DATE_CREATED",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "LAST_UPDATED",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "LAST_UPDATED",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "QuantumMroupgPayPeriodInstance",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "StagingPayPeriodInstance",
 						"type": "DatasetReference"
 					}
 				]
