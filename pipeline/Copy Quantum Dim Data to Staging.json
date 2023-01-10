@@ -2662,7 +2662,7 @@
 								"sink": {
 									"name": "EFFECTIVE_DATE",
 									"type": "DateTime",
-									"physicalType": "date"
+									"physicalType": "datetime"
 								}
 							},
 							{
@@ -2708,7 +2708,7 @@
 								"sink": {
 									"name": "DATE_CREATED",
 									"type": "DateTime",
-									"physicalType": "date"
+									"physicalType": "datetime"
 								}
 							},
 							{
@@ -2730,7 +2730,7 @@
 								"sink": {
 									"name": "LAST_UPDATED",
 									"type": "DateTime",
-									"physicalType": "date"
+									"physicalType": "datetime"
 								}
 							},
 							{
