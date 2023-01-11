@@ -2684,7 +2684,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT ID\n, SYSUR_AUTO_KEY\n, EFFECTIVE_DATE\n, RATE\n, PERIOD\n, VERSION\n, DATE_CREATED\n, CREATED_BY\n, LAST_UPDATED\n, UPDATED_BY\nFROM MROUPG.SYS_USERS_RATE\nWHERE DELETE_DATE IS NULL",
+								"oracleReaderQuery": "SELECT ID\n, SYSUR_AUTO_KEY\n, EFFECTIVE_DATE\n, RATE\n, PERIOD\n, VERSION\n, DATE_CREATED\n, CREATED_BY\n, LAST_UPDATED\n, UPDATED_BY\n, DELETE_DATE\nFROM MROUPG.SYS_USERS_RATE\nWHERE DELETE_DATE IS NULL",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -2733,7 +2733,7 @@
 										"sink": {
 											"name": "EFFECTIVE_DATE",
 											"type": "DateTime",
-											"physicalType": "date"
+											"physicalType": "datetime"
 										}
 									},
 									{
@@ -2779,7 +2779,7 @@
 										"sink": {
 											"name": "DATE_CREATED",
 											"type": "DateTime",
-											"physicalType": "date"
+											"physicalType": "datetime"
 										}
 									},
 									{
@@ -2801,7 +2801,7 @@
 										"sink": {
 											"name": "LAST_UPDATED",
 											"type": "DateTime",
-											"physicalType": "date"
+											"physicalType": "datetime"
 										}
 									},
 									{
@@ -2813,6 +2813,17 @@
 											"name": "UPDATED_BY",
 											"type": "String",
 											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DELETE_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DELETE_DATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
 										}
 									}
 								],
@@ -3366,7 +3377,7 @@
 										"sink": {
 											"name": "START_DATE",
 											"type": "DateTime",
-											"physicalType": "date"
+											"physicalType": "datetime"
 										}
 									},
 									{
@@ -3377,7 +3388,7 @@
 										"sink": {
 											"name": "END_DATE",
 											"type": "DateTime",
-											"physicalType": "date"
+											"physicalType": "datetime"
 										}
 									},
 									{
@@ -3399,7 +3410,7 @@
 										"sink": {
 											"name": "CLOSED_DATE",
 											"type": "DateTime",
-											"physicalType": "date"
+											"physicalType": "datetime"
 										}
 									},
 									{
@@ -3421,7 +3432,7 @@
 										"sink": {
 											"name": "DATE_CREATED",
 											"type": "DateTime",
-											"physicalType": "date"
+											"physicalType": "datetime"
 										}
 									},
 									{
@@ -3432,7 +3443,7 @@
 										"sink": {
 											"name": "LAST_UPDATED",
 											"type": "DateTime",
-											"physicalType": "date"
+											"physicalType": "datetime"
 										}
 									}
 								],
@@ -3453,6 +3464,468 @@
 						"outputs": [
 							{
 								"referenceName": "StagingPayPeriodInstance",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Quantum SHIFT",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT s.ID AS SHIFT_ID\n, s.SYSUR_AUTO_KEY\n, s.EFFECTIVE_DATE\n, s.START_WEEK\n, s.VERSION AS SHIFT_VERSION\n, s.DELETE_DATE AS SHIFT_DELETE_DATE\n, s.DELETED_BY AS SHIFT_DELETED_BY\n, s.SHIFT_TEMPLATE_ID\n, t.NAME\n, t.ACTIVE\n, t.VERSION AS SHIFT_TEMPLATE_VERSION\n, t.DELETE_DATE AS SHIFT_TEMPLATE_DELETE_DATE\n, t.DELETED_BY AS SHIFT_TEMPLATE_DELETED_BY\n, w.ID SHIFT_WEEK_ID\n, w.WEEK_SEQUENCE\n, w.VERSION AS SHIFT_WEEK_VERSION\n, w.DAY_1_START\n, w.DAY_1_DURATION\n, w.DAY_2_START\n, w.DAY_2_DURATION\n, w.DAY_3_START\n, w.DAY_3_DURATION\n, w.DAY_4_START\n, w.DAY_4_DURATION\n, w.DAY_5_START\n, w.DAY_5_DURATION\n, w.DAY_6_START\n, w.DAY_6_DURATION\n, w.DAY_7_START\n, w.DAY_7_DURATION\n, w.SCHED_TYPE\n, w.DELETE_DATE AS SHIFT_WEEK_DELETE_DATE\n, w.DELETED_BY AS SHIFT_WEEK_DELETED_BY\nFROM MROUPG.SHIFT s\nINNER JOIN MROUPG.SHIFT_TEMPLATE t\nON s.SHIFT_TEMPLATE_ID = t.ID\nINNER JOIN MROUPG.SHIFT_WEEK w\nON t.ID = w.SHIFT_TEMP_ID",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE MROUPG_SHIFT_TEMPLATE_WEEK",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "SHIFT_ID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SHIFT_ID",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SYSUR_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SYSUR_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "EFFECTIVE_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "EFFECTIVE_DATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "START_WEEK",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "START_WEEK",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_VERSION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "SHIFT_VERSION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_DELETE_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "SHIFT_DELETE_DATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_DELETED_BY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIFT_DELETED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_TEMPLATE_ID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SHIFT_TEMPLATE_ID",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "NAME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NAME",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ACTIVE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ACTIVE",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_TEMPLATE_VERSION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "SHIFT_TEMPLATE_VERSION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_TEMPLATE_DELETE_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "SHIFT_TEMPLATE_DELETE_DATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_TEMPLATE_DELETED_BY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIFT_TEMPLATE_DELETED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_WEEK_ID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SHIFT_WEEK_ID",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "WEEK_SEQUENCE",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "WEEK_SEQUENCE",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_WEEK_VERSION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "SHIFT_WEEK_VERSION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_1_START",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_1_START",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_1_DURATION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_1_DURATION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_2_START",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_2_START",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_2_DURATION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_2_DURATION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_3_START",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_3_START",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_3_DURATION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_3_DURATION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_4_START",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_4_START",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_4_DURATION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_4_DURATION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_5_START",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_5_START",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_5_DURATION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_5_DURATION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_6_START",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_6_START",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_6_DURATION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_6_DURATION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_7_START",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_7_START",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DAY_7_DURATION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DAY_7_DURATION",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 4,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "SCHED_TYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SCHED_TYPE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_WEEK_DELETE_DATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "SHIFT_WEEK_DELETE_DATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "SHIFT_WEEK_DELETED_BY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SHIFT_WEEK_DELETED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QuantumMroupgShift",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "StagingShiftTemplateWeek",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -3505,7 +3978,9 @@
 				"[concat(variables('factoryId'), '/datasets/QuantumTestenvUserPositions')]",
 				"[concat(variables('factoryId'), '/datasets/StagingUserPositions')]",
 				"[concat(variables('factoryId'), '/datasets/QuantumMroupgPayPeriodInstance')]",
-				"[concat(variables('factoryId'), '/datasets/StagingPayPeriodInstance')]"
+				"[concat(variables('factoryId'), '/datasets/StagingPayPeriodInstance')]",
+				"[concat(variables('factoryId'), '/datasets/QuantumMroupgShift')]",
+				"[concat(variables('factoryId'), '/datasets/StagingShiftTemplateWeek')]"
 			]
 		},
 		{
@@ -4275,6 +4750,48 @@
 				"typeProperties": {
 					"schema": "MROUPG",
 					"table": "EFFICIENCY_DETAIL_TAB"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgPayPeriodInstance')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "MROUPG",
+					"table": "PAY_PERIOD_INSTANCE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QuantumMroupgShift')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "MROUPG",
+					"table": "SHIFT"
 				}
 			},
 			"dependsOn": [
@@ -5669,6 +6186,286 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/StagingPayPeriodInstance')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "STATUS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PAY_PERIOD_ID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "VERSION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "START_DATE",
+						"type": "date"
+					},
+					{
+						"name": "END_DATE",
+						"type": "date"
+					},
+					{
+						"name": "ACCRUAL_STATUS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CLOSED_DATE",
+						"type": "date"
+					},
+					{
+						"name": "CLOSED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DATE_CREATED",
+						"type": "date"
+					},
+					{
+						"name": "LAST_UPDATED",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MROUPG_PAY_PERIOD_INSTANCE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingShiftTemplateWeek')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "SHIFT_ID4",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "SYSUR_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "EFFECTIVE_DATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "START_WEEK",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 2
+					},
+					{
+						"name": "SHIFT_VERSION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 5
+					},
+					{
+						"name": "SHIFT_DELETE_DATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "SHIFT_DELETED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIFT_TEMPLATE_ID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "NAME",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ACTIVE",
+						"type": "nchar"
+					},
+					{
+						"name": "SHIFT_TEMPLATE_VERSION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 5
+					},
+					{
+						"name": "SHIFT_TEMPLATE_DELETE_DATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "SHIFT_TEMPLATE_DELETED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIFT_WEEK_ID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "WEEK_SEQUENCE",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 2
+					},
+					{
+						"name": "SHIFT_WEEK_VERSION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 5
+					},
+					{
+						"name": "DAY_1_START",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_1_DURATION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_2_START",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_2_DURATION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_3_START",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_3_DURATION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_4_START",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_4_DURATION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_5_START",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_5_DURATION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_6_START",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_6_DURATION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_7_START",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "DAY_7_DURATION",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 4
+					},
+					{
+						"name": "SCHED_TYPE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SHIFT_WEEK_DELETE_DATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "SHIFT_WEEK_DELETED_BY",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MROUPG_SHIFT_TEMPLATE_WEEK"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/StagingSysCompanies')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -5899,7 +6696,9 @@
 					},
 					{
 						"name": "EFFECTIVE_DATE",
-						"type": "date"
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
 					},
 					{
 						"name": "RATE",
@@ -5912,12 +6711,15 @@
 					},
 					{
 						"name": "VERSION",
-						"type": "float",
-						"precision": 15
+						"type": "decimal",
+						"precision": 22,
+						"scale": 5
 					},
 					{
 						"name": "DATE_CREATED",
-						"type": "date"
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
 					},
 					{
 						"name": "CREATED_BY",
@@ -5925,11 +6727,19 @@
 					},
 					{
 						"name": "LAST_UPDATED",
-						"type": "date"
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
 					},
 					{
 						"name": "UPDATED_BY",
 						"type": "nvarchar"
+					},
+					{
+						"name": "DELETE_DATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
 					}
 				],
 				"typeProperties": {
@@ -6338,99 +7148,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/QuantumMroupgPayPeriodInstance')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Oracle1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "MROUPG",
-					"table": "PAY_PERIOD_INSTANCE"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingPayPeriodInstance')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "STATUS",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PAY_PERIOD_ID",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "VERSION",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "START_DATE",
-						"type": "date"
-					},
-					{
-						"name": "END_DATE",
-						"type": "date"
-					},
-					{
-						"name": "ACCRUAL_STATUS",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CLOSED_DATE",
-						"type": "date"
-					},
-					{
-						"name": "CLOSED_BY",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DATE_CREATED",
-						"type": "date"
-					},
-					{
-						"name": "LAST_UPDATED",
-						"type": "date"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MROUPG_PAY_PERIOD_INSTANCE"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
 		}
 	]
 }

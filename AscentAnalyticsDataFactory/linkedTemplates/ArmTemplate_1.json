@@ -21,6 +21,44 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLDistribution')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TESTENV",
+					"table": "GL_DISTRIBUTION"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLFiscal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TESTENV",
+					"table": "GL_FISCAL"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/QuantumTestenvGLJournal')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -221,25 +259,6 @@
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
 					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/QuantumMroupgPayPeriodInstance')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Oracle1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "MROUPG",
-					"table": "PAY_PERIOD_INSTANCE"
 				}
 			},
 			"dependsOn": []
@@ -750,126 +769,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "MROUPG_EFFICIENCY_DETAIL_TAB"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StagingGLAccount')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "GLA_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "ACCOUNT_NUMBER",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ACCOUNT_TYPE_DESC",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SYSCM_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GAC_AUTO_KEY",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "nvarchar"
-					},
-					{
-						"name": "GLS_AUTO_KEY0",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLS_AUTO_KEY1",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLS_AUTO_KEY2",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLS_AUTO_KEY3",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "GLS_AUTO_KEY4",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "LEDGER",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SEQ",
-						"type": "decimal",
-						"precision": 22,
-						"scale": 0
-					},
-					{
-						"name": "BUDGETED",
-						"type": "nchar"
-					},
-					{
-						"name": "COSTOFGOODS_FLAG",
-						"type": "nchar"
-					},
-					{
-						"name": "ALLOW_ENTRY",
-						"type": "nchar"
-					},
-					{
-						"name": "REPLACEABLE",
-						"type": "nchar"
-					},
-					{
-						"name": "OTHER_INCOME_FLAG",
-						"type": "nchar"
-					},
-					{
-						"name": "OTHER_EXPENSE_FLAG",
-						"type": "nchar"
-					},
-					{
-						"name": "CONTROL_ACCOUNT_FLAG",
-						"type": "nchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TESTENV_GL_ACCOUNT"
 				}
 			},
 			"dependsOn": [
