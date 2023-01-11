@@ -982,7 +982,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT WOK_AUTO_KEY\n, DESCRIPTION\n, SDF_WOK_003\n, SDF_WOK_001\n, SDF_WOK_002\n, BILLING_RATE\nFROM TESTENV.WO_SKILLS",
+						"oracleReaderQuery": "SELECT WOK_AUTO_KEY\n, DESCRIPTION\n, SDF_WOK_003\n, SDF_WOK_001\n, SDF_WOK_004\n, SDF_WOK_002\n, BILLING_RATE\nFROM TESTENV.WO_SKILLS",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -1045,6 +1045,17 @@
 							},
 							{
 								"source": {
+									"name": "SDF_WOK_004",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SDF_WOK_004",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
 									"name": "SDF_WOK_002",
 									"type": "String"
 								},
@@ -1063,7 +1074,7 @@
 									"name": "BILLING_RATE",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 0,
+									"scale": 19,
 									"precision": 22
 								}
 							}
