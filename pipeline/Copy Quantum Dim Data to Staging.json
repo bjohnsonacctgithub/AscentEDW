@@ -3411,7 +3411,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE MROUPG_SHIFT_TEMPLATE_WEEK",
+						"preCopyScript": "TRUNCATE TABLE MROUPG_SHIFT_TEMPLATE_WEEK",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
