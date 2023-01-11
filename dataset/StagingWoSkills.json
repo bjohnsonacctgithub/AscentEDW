@@ -27,6 +27,10 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "SDF_WOK_004",
+				"type": "nvarchar"
+			},
+			{
 				"name": "SDF_WOK_002",
 				"type": "nvarchar"
 			},
