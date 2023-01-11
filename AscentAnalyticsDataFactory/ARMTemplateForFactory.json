@@ -1035,7 +1035,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT WOK_AUTO_KEY\n, DESCRIPTION\n, SDF_WOK_003\n, SDF_WOK_001\n, SDF_WOK_002\n, BILLING_RATE\nFROM TESTENV.WO_SKILLS",
+								"oracleReaderQuery": "SELECT WOK_AUTO_KEY\n, DESCRIPTION\n, SDF_WOK_003\n, SDF_WOK_001\n, SDF_WOK_004\n, SDF_WOK_002\n, BILLING_RATE\nFROM TESTENV.WO_SKILLS",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -1098,6 +1098,17 @@
 									},
 									{
 										"source": {
+											"name": "SDF_WOK_004",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SDF_WOK_004",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
 											"name": "SDF_WOK_002",
 											"type": "String"
 										},
@@ -1116,7 +1127,7 @@
 											"name": "BILLING_RATE",
 											"type": "Decimal",
 											"physicalType": "decimal",
-											"scale": 0,
+											"scale": 19,
 											"precision": 22
 										}
 									}
@@ -2251,7 +2262,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT SYSUR_AUTO_KEY\n, EMPLOYEE_CODE\n, USER_NAME\n, USER_ID\n, FIRST_NAME\n, MIDDLE_NAME\n, LAST_NAME\n, EMAIL_ADDRESS\n, START_DATE\n, END_DATE\n, BIRTH_DATE\n, WOK_AUTO_KEY\n, SYSCM_AUTO_KEY\n, GEO_AUTO_KEY\n, PHONE_NUMBER\n, LICENSE_TYPE\n, LICENSE_NUMBER\n, SYSUR_TA_SUPER\n, OVER_TIME\n, CONTRACTOR\n, DPT_AUTO_KEY\n, CMP_AUTO_KEY\nFROM TESTENV.SYS_USERS",
+								"oracleReaderQuery": "SELECT u.SYSUR_AUTO_KEY\n, u.EMPLOYEE_CODE\n, u.USER_NAME\n, u.USER_ID\n, u.FIRST_NAME\n, u.MIDDLE_NAME\n, u.LAST_NAME\n, u.EMAIL_ADDRESS\n, u.START_DATE\n, u.END_DATE\n, u.BIRTH_DATE\n, u.WOK_AUTO_KEY\n, u.SYSCM_AUTO_KEY\n, u.GEO_AUTO_KEY\n, u.PHONE_NUMBER\n, u.LICENSE_TYPE\n, u.LICENSE_NUMBER\n, u.SYSUR_TA_SUPER\n, u.OVER_TIME\n, u.CONTRACTOR\n, u.DPT_AUTO_KEY\n, u.CMP_AUTO_KEY\n, e.CUR_SYSCM_AUTO_KEY\n, e.SYSCM_AUTO_KEY AS EXT_SYSCM_AUTO_KEY\n, e.DIV_AUTO_KEY\n, e.CUR_DIV_AUTO_KEY\n, u.DIRECT\n, u.ARCHIVED\n, u.SDF_SYSUR_001\nFROM TESTENV.SYS_USERS u\nINNER JOIN MROUPG.EXT_SYS_USERS e\nON u.SYSUR_AUTO_KEY = e.SYSUR_AUTO_KEY",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -2520,6 +2531,91 @@
 											"physicalType": "decimal",
 											"scale": 0,
 											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "CUR_SYSCM_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "CUR_SYSCM_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "EXT_SYSCM_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "EXT_SYSCM_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DIV_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "DIV_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "CUR_DIV_AUTO_KEY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "CUR_DIV_AUTO_KEY",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 22
+										}
+									},
+									{
+										"source": {
+											"name": "DIRECT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DIRECT",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ARCHIVED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ARCHIVED",
+											"type": "String",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SDF_SYSUR_001",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SDF_SYSUR_001",
+											"type": "String",
+											"physicalType": "nvarchar"
 										}
 									}
 								],
@@ -6659,6 +6755,42 @@
 						"type": "decimal",
 						"precision": 22,
 						"scale": 0
+					},
+					{
+						"name": "CUR_SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "EXT_SYSCM_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DIV_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "CUR_DIV_AUTO_KEY",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "DIRECT",
+						"type": "nchar"
+					},
+					{
+						"name": "ARCHIVED",
+						"type": "nchar"
+					},
+					{
+						"name": "SDF_SYSUR_001",
+						"type": "nvarchar"
 					}
 				],
 				"typeProperties": {
@@ -6947,6 +7079,10 @@
 					},
 					{
 						"name": "SDF_WOK_001",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SDF_WOK_004",
 						"type": "nvarchar"
 					},
 					{
