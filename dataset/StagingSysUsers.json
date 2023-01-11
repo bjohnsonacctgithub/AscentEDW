@@ -109,6 +109,42 @@
 				"type": "decimal",
 				"precision": 22,
 				"scale": 0
+			},
+			{
+				"name": "CUR_SYSCM_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "EXT_SYSCM_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "DIV_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "CUR_DIV_AUTO_KEY",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "DIRECT",
+				"type": "nchar"
+			},
+			{
+				"name": "ARCHIVED",
+				"type": "nchar"
+			},
+			{
+				"name": "SDF_SYSUR_001",
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
